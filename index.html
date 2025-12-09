@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | QA Engineer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Newsreader', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            sky: '#38BDF8',
+                            dark: '#050505',
+                            panel: '#0F110E',
+                        }
+                    },
+                    backgroundImage: {
+                        'radial-glow': 'radial-gradient(circle at 70% 50%, rgba(56, 189, 248, 0.25) 0%, rgba(5, 5, 5, 0) 60%)',
+                    },
+                    animation: {
+                        'beam': 'beam 3s linear infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'spin-slow-reverse': 'spin 15s linear infinite reverse',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        beam: {
+                            '0%': { strokeDashoffset: '1000' },
+                            '100%': { strokeDashoffset: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030303;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
+            }
+
+            50% {
+                text-shadow: 0 0 40px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.6);
+            }
+        }
+
+        .animate-text-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .grid-bg {
+            background-size: 100px 200px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        .beam-line {
+            stroke-dasharray: 80 1000;
+            stroke-linecap: round;
+        }
+
+        @keyframes sonar-wave {
+            0% {
+                r: 10px;
+                opacity: 0.8;
+                stroke-width: 1px;
+            }
+
+            100% {
+                r: 80px;
+                opacity: 0;
+                stroke-width: 0px;
+            }
+        }
+
+        .animate-sonar {
+            animation: sonar-wave 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .delay-1000 {
+            animation-delay: 1s;
+        }
+
+        .delay-2000 {
+            animation-delay: 2s;
+        }
+
+        /* Shiny CTA Button CSS */
+        @property --gradient-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --gradient-angle-offset {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @property --gradient-percent {
+            syntax: "<percentage>";
+            initial-value: 20%;
+            inherits: false;
+        }
+
+        @property --gradient-shine {
+            syntax: "<color>";
+            initial-value: #38BDF8;
+            inherits: false;
+        }
+
+        .shiny-cta {
+            --gradient-angle: 0deg;
+            --gradient-angle-offset: 0deg;
+            --gradient-percent: 20%;
+            --gradient-shine: #38BDF8;
+            position: relative;
+            overflow: hidden;
+            border-radius: 9999px;
+            padding: 1.25rem 2.5rem;
+            font-size: 1rem;
+            line-height: 1.2;
+            font-weight: 500;
+            color: #ffffff;
+            background: linear-gradient(#030303, #030303) padding-box,
+                conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #0ea5e9 5%, var(--gradient-shine) 15%, #0ea5e9 30%, transparent 40%, transparent 100%) border-box;
+            border: 2px solid transparent;
+            box-shadow: inset 0 0 0 1px #1a1818;
+            outline: none;
+            transition: 800ms;
+            cursor: pointer;
+            isolation: isolate;
+            outline-offset: 4px;
+            z-index: 0;
+            animation: border-spin 2.5s linear infinite;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes border-spin {
+            to {
+                --gradient-angle: 360deg;
+            }
+        }
+
+        .shiny-cta::before {
+            content: '';
+            pointer-events: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            --size: calc(100% - 6px);
+            width: var(--size);
+            height: var(--size);
+            background: radial-gradient(circle at 2px 2px, white 0.5px, transparent 0) padding-box;
+            background-size: 4px 4px;
+            mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+            border-radius: inherit;
+            opacity: 0.4;
+        }
+
+        .shiny-cta::after {
+            content: '';
+            pointer-events: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(-50deg, transparent, #0ea5e9, transparent);
+            mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+            opacity: 0.6;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        [style*="--border-gradient"]::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: inherit;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            background: var(--border-gradient);
+            pointer-events: none;
+        }
+
+        /* Contact Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .contact-card {
+            background: #0A0A0A;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+            animation: glow-pulse 3s infinite;
+        }
+
+        .popup-overlay.active .contact-card {
+            transform: scale(1);
+        }
+
+        @keyframes glow-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4), 0 0 20px 0 rgba(56, 189, 248, 0.2);
+                border-color: rgba(56, 189, 248, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 5px rgba(56, 189, 248, 0.3), 0 0 40px 10px rgba(56, 189, 248, 0.1);
+                border-color: rgba(56, 189, 248, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4), 0 0 20px 0 rgba(56, 189, 248, 0.2);
+                border-color: rgba(56, 189, 248, 0.3);
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Magnetic Button */
+        .magnetic-btn {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes wave-spin {
+            0% {
+                transform: rotate(0deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+
+            33% {
+                border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+            }
+
+            66% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+        }
+
+        @keyframes blob {
+
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .lightning-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: lightning-dash 3s linear infinite;
+            filter: url(#glow);
+        }
+
+        @keyframes lightning-dash {
+            0% {
+                stroke-dashoffset: 1000;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden selection:bg-brand-sky selection:text-black relative">
+
+    <!-- Particle Canvas -->
+    <canvas id="bg-particles" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+
+    <!-- Lightning & Ambient Background -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full mix-blend-screen opacity-30">
+            <div
+                class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-brand-sky/20 blur-[100px] animate-blob">
+            </div>
+            <div
+                class="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-[100px] animate-blob animation-delay-2000">
+            </div>
+            <div
+                class="absolute bottom-[-20%] left-[10%] w-[600px] h-[600px] rounded-full bg-brand-sky/10 blur-[120px] animate-blob animation-delay-4000">
+            </div>
+        </div>
+        <svg class="absolute inset-0 w-full h-full opacity-40" preserveAspectRatio="none">
+            <defs>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <linearGradient id="beam-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="rgba(56, 189, 248, 0)" />
+                    <stop offset="50%" stop-color="#38BDF8" />
+                    <stop offset="100%" stop-color="rgba(56, 189, 248, 0)" />
+                </linearGradient>
+            </defs>
+            <!-- Top curve -->
+            <path class="lightning-path" fill="none" stroke="url(#beam-grad)" stroke-width="2"
+                d="M0,100 Q400,300 800,100 T1600,200" style="animation-duration: 4s;" />
+            <!-- Middle curve -->
+            <path class="lightning-path" fill="none" stroke="url(#beam-grad)" stroke-width="3"
+                d="M-100,600 Q400,400 900,800 T1800,500" style="animation-duration: 6s; animation-delay: 1s;" />
+            <!-- Bottom curve -->
+            <path class="lightning-path" fill="none" stroke="url(#beam-grad)" stroke-width="2"
+                d="M0,900 Q600,700 1200,1000" style="animation-duration: 5s; animation-delay: 2s;" />
+        </svg>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+        class="fixed -translate-x-1/2 flex shadow-black/50 transition-all duration-300 hover:border-white/20 hover:shadow-brand-sky/5 bg-gradient-to-br from-white/10 to-white/0 w-fit max-w-[90vw] z-50 rounded-full ring-white/10 ring-1 pt-1.5 pr-1.5 pb-1.5 pl-4 top-6 left-1/2 backdrop-blur-xl items-center justify-between">
+        <div class="flex gap-2.5 items-center mr-8">
+            <div class="relative flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    style="width: 24px; height: 24px; color: rgb(56, 189, 248);"
+                    class="iconify iconify--solar w-[24px] h-[24px]" aria-hidden="true" role="img"
+                    data-icon="solar:shield-check-bold-duotone">
+                    <path fill="#38bdf8"
+                        d="M11.236 1.15a1.76 1.76 0 0 1 1.528 0l7.869 3.093c.801.315 1.353 1.054 1.365 1.914l.002.324c-.018 3.553-.33 11.536-4.996 15.11a11.1 11.1 0 0 1-4.706 1.94c-.198.031-.4.031-.598 0c-2.072-.323-5.322-1.282-7.85-5.368c-1.577-2.55-1.84-5.658-1.85-11.69a2.05 2.05 0 0 1 1.367-1.906z"
+                        opacity=".5"></path>
+                    <path fill="#38bdf8"
+                        d="m15.53 9.47l-4.47 4.47l-2.03-2.03a.75.75 0 0 0-1.06 1.06l2.56 2.56a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0-1.06-1.06">
+                    </path>
+                </svg>
+            </div>
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+                class="font-sans font-medium text-base tracking-tight text-white hover:text-brand-sky transition-colors">Ameen
+                S R</a>
+        </div>
+        <div class="hidden md:flex items-center gap-6 mr-8">
+            <a href="#about" class="text-xs font-medium text-white/50 hover:text-white transition-colors">About</a>
+            <a href="#experience"
+                class="text-xs font-medium text-white/50 hover:text-white transition-colors">Experience</a>
+        </div>
+        <a href="https://drive.google.com/drive/folders/1S-1NMSxv8ekfqqLv7ETo2mfNtiTWjS3N?usp=sharing" target="_blank"
+            class="hidden md:flex items-center gap-2 px-4 py-2 mr-2 rounded-full border border-white/20 text-white text-xs font-semibold hover:bg-white/10 transition-colors">
+            Resume
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main
+        class="container lg:px-12 lg:pt-0 min-h-[1100px] flex flex-col lg:flex-row z-10 mr-auto ml-auto pt-0 pr-6 pl-6 relative items-center">
+        <!-- Text -->
+        <div class="w-full lg:w-1/2 flex flex-col justify-center pt-12 pb-20 lg:py-0">
+            <h4 class="text-xs font-mono tracking-[0.2em] text-white/40 uppercase mb-8 flex items-center gap-2">
+                <span class="relative flex h-2 w-2"><span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-sky opacity-75"></span><span
+                        class="relative inline-flex rounded-full h-2 w-2 bg-brand-sky"></span></span>
+                Available for Projects
+            </h4>
+            <h1
+                class="lg:text-7xl leading-[1.1] text-brand-sky animate-text-glow text-5xl italic tracking-tight font-serif mb-6">
+                Engineering perfection.<br>
+                <span class="text-white opacity-90">Securing reliability.</span>
+            </h1>
+            <p
+                class="font-sans text-xl lg:text-2xl font-light text-white/70 leading-relaxed tracking-tight max-w-xl mb-12">
+                Implementing comprehensive automated testing strategies to ensure impeccable user experiences and zero
+                downtime.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 gap-x-6 gap-y-6 items-start sm:items-center reveal-up"
+                style="transition-delay: 0.2s;">
+                <a href="#experience" class="shiny-cta focus:outline-none text-center magnetic-btn"><span>View
+                        Experience</span></a>
+                <button onclick="openContactPopup()"
+                    class="hover:bg-white/10 hover:text-white transition-all flex text-sm font-medium text-slate-300 bg-white/5 rounded-full pt-3 pr-6 pb-3 pl-6 gap-x-2 gap-y-2 items-center group cursor-pointer magnetic-btn"
+                    style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05); position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.15)); --border-radius-before: 9999px">
+                    <span class="text-sm font-medium tracking-tight">Contact Me</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Visuals -->
+        <div class="lg:w-1/2 lg:h-[800px] flex w-full h-[500px] relative perspective-1000 items-center justify-center">
+            <svg class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible" viewBox="0 0 600 600">
+                <g>
+                    <path d="M -50 150 C 100 150, 100 300, 300 300" fill="none" stroke="white" stroke-width="1"
+                        class="opacity-[0.08]"></path>
+                    <path d="M -50 150 C 100 150, 100 300, 300 300" fill="none" stroke="#38BDF8" stroke-width="1.5"
+                        class="beam-line animate-beam opacity-60"></path>
+                </g>
+                <g>
+                    <path d="M -50 450 C 100 450, 100 300, 300 300" fill="none" stroke="white" stroke-width="1"
+                        class="opacity-[0.08]"></path>
+                    <path d="M -50 450 C 100 450, 100 300, 300 300" fill="none" stroke="#38BDF8" stroke-width="1.5"
+                        class="beam-line animate-beam opacity-60" style="animation-delay: -1s;"></path>
+                </g>
+                <g>
+                    <path d="M 650 100 C 500 100, 500 300, 300 300" fill="none" stroke="white" stroke-width="1"
+                        class="opacity-[0.08]"></path>
+                    <path d="M 650 100 C 500 100, 500 300, 300 300" fill="none" stroke="#38BDF8" stroke-width="1.5"
+                        class="beam-line animate-beam opacity-60" style="animation-delay: -2s;"></path>
+                </g>
+                <g>
+                    <path d="M 650 500 C 500 500, 500 300, 300 300" fill="none" stroke="white" stroke-width="1"
+                        class="opacity-[0.08]"></path>
+                    <path d="M 650 500 C 500 500, 500 300, 300 300" fill="none" stroke="#38BDF8" stroke-width="1.5"
+                        class="beam-line animate-beam opacity-60" style="animation-delay: -1.5s;"></path>
+                </g>
+                <g transform="translate(300, 300)">
+                    <circle r="120" fill="url(#center-glow)" class="animate-pulse"></circle>
+                    <circle r="20" fill="none" stroke="#38BDF8" stroke-width="1" opacity="0.5" class="animate-sonar">
+                    </circle>
+                    <circle r="20" fill="none" stroke="#38BDF8" stroke-width="1" opacity="0.5"
+                        class="animate-sonar delay-1000"></circle>
+                    <circle r="20" fill="none" stroke="#38BDF8" stroke-width="1" opacity="0.5"
+                        class="animate-sonar delay-2000"></circle>
+                    <circle r="65" fill="none" stroke="white" stroke-opacity="0.1" stroke-width="1"
+                        stroke-dasharray="10 20" class="animate-spin-slow"></circle>
+                    <circle r="45" fill="none" stroke="#38BDF8" stroke-opacity="0.2" stroke-width="1"
+                        stroke-dasharray="4 6" class="animate-spin-slow-reverse"></circle>
+                    <circle r="8" fill="#0A0A0A" stroke="#38BDF8" stroke-width="2"></circle>
+                    <circle r="4" fill="#38BDF8" class="animate-pulse-fast"></circle>
+                </g>
+            </svg>
+            <div class="absolute top-[20%] lg:top-[25%] left-[10%] lg:left-[15%] flex flex-col items-end">
+                <span class="text-xs font-mono text-brand-sky tracking-widest mb-1 opacity-80">100% COVERAGE</span>
+                <div class="h-[1px] w-12 bg-gradient-to-l from-brand-sky to-transparent"></div>
+            </div>
+            <div class="absolute bottom-[20%] lg:bottom-[25%] right-[10%] lg:right-[15%] flex flex-col items-start">
+                <span class="text-xs font-mono text-brand-sky tracking-widest mb-1 opacity-80">ZERO BUGS</span>
+                <div class="h-[1px] w-12 bg-gradient-to-l from-brand-sky to-transparent"></div>
+            </div>
+        </div>
+
+        <section class="w-[95%] z-20 pb-8 absolute bottom-0">
+            <div
+                class="flex flex-col lg:flex-row overflow-hidden opacity-50 w-full pt-6 gap-x-6 gap-y-6 items-center justify-between">
+                <style>
+                    @keyframes marquee {
+                        0% {
+                            transform: translateX(0);
+                        }
+
+                        100% {
+                            transform: translateX(-50%);
+                        }
+                    }
+
+                    .animate-marquee {
+                        animation: marquee 40s linear infinite;
+                    }
+
+                    .mask-gradient-fade {
+                        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                    }
+                </style>
+                <div class="flex-1 overflow-hidden mask-gradient-fade w-full relative">
+                    <div
+                        class="flex animate-marquee hover:[animation-play-state:paused] w-max gap-x-32 gap-y-16 items-center">
+                        <span class="text-white/50 font-mono text-lg">CYPRESS</span>
+                        <span class="text-white/50 font-mono text-lg">SELENIUM</span>
+                        <span class="text-white/50 font-mono text-lg">PLAYWRIGHT</span>
+                        <span class="text-white/50 font-mono text-lg">JEST</span>
+                        <span class="text-white/50 font-mono text-lg">JIRA</span>
+                        <span class="text-white/50 font-mono text-lg">APPIUM</span>
+                        <!-- Duplicate -->
+                        <span class="text-white/50 font-mono text-lg">CYPRESS</span>
+                        <span class="text-white/50 font-mono text-lg">SELENIUM</span>
+                        <span class="text-white/50 font-mono text-lg">PLAYWRIGHT</span>
+                        <span class="text-white/50 font-mono text-lg">JEST</span>
+                        <span class="text-white/50 font-mono text-lg">JIRA</span>
+                        <span class="text-white/50 font-mono text-lg">APPIUM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Features -->
+    <section
+        class="flex flex-col overflow-hidden lg:px-12 z-10 bg-black/50 w-full border-white/5 border-t pt-32 pr-6 pb-32 pl-6 relative backdrop-blur-3xl items-center">
+        <div class="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        <div class="flex flex-col items-center text-center max-w-3xl mb-24 relative z-10">
+            <div
+                class="flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+                <span class="flex h-2 w-2 relative">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-sky opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-sky"></span>
+                </span>
+                <span class="text-xs font-mono text-brand-sky uppercase tracking-[0.2em] font-medium">Test
+                    Capabilities</span>
+            </div>
+            <h2 class="text-5xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight text-white mb-8">
+                Software reliability <span class="text-white/60">guaranteed.</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 z-10 w-full max-w-7xl relative gap-x-6 gap-y-6">
+            <script>
+                document.querySelectorAll('.spotlight-card').forEach(card => {
+                    card.addEventListener('mousemove', e => {
+                        const rect = card.getBoundingClientRect();
+                        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                    });
+                });
+            </script>
+
+            <!-- End-to-End Automation -->
+            <div
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
+                <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
+                </div>
+                <div class="pointer-events-none absolute inset-0 rounded-[32px] border border-brand-sky/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent); -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent);">
+                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-white mb-4 relative z-10">End-to-End Automation
+                </h3>
+                <p class="text-base text-white/50 leading-relaxed mb-12 relative z-10 font-light">Building comprehensive
+                    test suites that simulate real user behavior across all environments.</p>
+                <div
+                    class="relative z-10 mt-auto w-full h-72 rounded-2xl border border-white/10 bg-[#0A0A0A] overflow-hidden flex flex-col shadow-2xl">
+                    <div class="px-5 py-4 border-b border-white/5 flex items-center justify-between bg-white/5">
+                        <div class="flex items-center gap-2 opacity-50">
+                            <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                            <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                        </div>
+                        <span class="text-xs text-white/30 font-mono">TEST_RUNNER</span>
+                    </div>
+                    <div class="p-6 flex flex-col gap-2 relative h-full font-mono text-xs">
+                        <span class="text-white/80">> npm run test:e2e</span>
+                        <span class="text-white/60">Running 18 test specs...</span>
+                        <span class="text-green-400">✓ Login Flow (124ms)</span>
+                        <span class="text-green-400">✓ Payment Gateway Analysis (540ms)</span>
+                        <span class="text-white/60 mt-2">Test Suites: 18 passed, 18 total</span>
+                        <span class="text-brand-sky mt-2">ALL TESTS PASSED in 2.4s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Grid -->
+            <div class="spotlight-card relative flex flex-col p-[1px] rounded-[32px] overflow-hidden lg:-mt-8 lg:mb-8 z-20 group reveal-up"
+                style="transition-delay: 0.1s;">
+                <div class="absolute inset-0 bg-[#050505] rounded-[31px] m-[1px] overflow-hidden">
+                    <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+                        style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
+                    </div>
+                </div>
+                <div class="pointer-events-none absolute inset-0 rounded-[32px] border border-brand-sky/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-50"
+                    style="mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent); -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent);">
+                </div>
+                <div class="relative z-10 flex flex-col h-full p-10 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <h3
+                            class="text-2xl font-semibold tracking-tight text-white group-hover:text-white transition-colors">
+                            Scalable Test Grid</h3>
+                    </div>
+                    <p
+                        class="text-base text-white/50 leading-relaxed mb-12 font-light group-hover:text-white/70 transition-colors">
+                        Orchestrating parallel test execution across diverse environments to reduce release cycles.</p>
+                    <div class="mt-auto relative w-full h-80 flex items-center justify-center perspective-1000">
+                        <div
+                            class="absolute w-36 h-36 border border-brand-sky/20 rounded-full animate-[spin_15s_linear_infinite]">
+                            <div
+                                class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-sky mt-[-3px] rounded-full shadow-[0_0_10px_rgba(56,189,248,1)]">
+                            </div>
+                        </div>
+                        <div
+                            class="z-10 flex bg-[#0F110E] w-24 h-24 border-white/10 border rounded-3xl relative items-center justify-center overflow-hidden shadow-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="text-white relative z-20 group-hover:text-brand-sky transition-colors duration-500">
+                                <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+                                <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+                                <line x1="6" x2="6.01" y1="6" y2="6" />
+                                <line x1="6" x2="6.01" y1="18" y2="18" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up"
+                style="transition-delay: 0.2s;">
+                <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
+                </div>
+                <div class="pointer-events-none absolute inset-0 rounded-[32px] border border-brand-sky/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent); -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent);">
+                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-white mb-4 relative z-10">Performance Engineering
+                </h3>
+                <p class="text-base text-white/50 leading-relaxed mb-12 relative z-10 font-light">Load testing, latency
+                    analysis, and bottleneck identification for maximum throughput.</p>
+                <div
+                    class="relative mt-auto w-full h-72 rounded-2xl border border-white/10 bg-[#0A0A0A] p-7 flex flex-col justify-center gap-6 shadow-2xl">
+                    <div class="flex justify-between items-center pb-4 border-b border-white/5">
+                        <div class="flex items-center gap-2"><span
+                                class="w-2 h-2 rounded-full bg-brand-sky shadow-none"></span><span
+                                class="text-xs text-white/50 font-mono uppercase tracking-wider">LOAD_TEST_V2</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs text-white/60"><span>RPS</span><span
+                                class="text-white">12,405</span></div>
+                        <div class="w-full h-1 bg-white/10 rounded-full">
+                            <div class="w-[85%] h-full bg-brand-sky rounded-full"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-white/60 pt-2"><span>P99 Latency</span><span
+                                class="text-white">45ms</span></div>
+                        <div class="w-full h-1 bg-white/10 rounded-full">
+                            <div class="w-[30%] h-full bg-emerald-500 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manual Testing -->
+            <div
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
+                <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
+                </div>
+                <div class="pointer-events-none absolute inset-0 rounded-[32px] border border-brand-sky/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent); -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent);">
+                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-white mb-4 relative z-10">Manual Testing</h3>
+                <p class="text-base text-white/50 leading-relaxed mb-12 relative z-10 font-light">Exploratory testing
+                    and detailed usability analysis for intuitive flows.</p>
+                <div
+                    class="relative z-10 mt-auto w-full h-72 rounded-2xl border border-white/10 bg-[#0A0A0A] p-6 flex flex-col gap-4 shadow-2xl overflow-hidden">
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                        <div
+                            class="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xs">
+                            ✓</div>
+                        <span class="text-sm text-white/70">Verify User Registration</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                        <div
+                            class="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xs">
+                            ✓</div>
+                        <span class="text-sm text-white/70">Check Mobile Responsiveness</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                        <div
+                            class="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 text-xs">
+                            ✓</div>
+                        <span class="text-sm text-white/70">Validate Error Messages</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5 opacity-50">
+                        <div class="w-5 h-5 rounded-full border border-white/20"></div>
+                        <span class="text-sm text-white/30">Cross-browser Layout...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Testing -->
+            <div
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
+                <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
+                </div>
+                <div class="pointer-events-none absolute inset-0 rounded-[32px] border border-brand-sky/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent); -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent);">
+                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-white mb-4 relative z-10">API Testing</h3>
+                <p class="text-base text-white/50 leading-relaxed mb-12 relative z-10 font-light">Validating REST
+                    endpoints for reliability, security, and performance.</p>
+                <div
+                    class="relative z-10 mt-auto w-full h-72 rounded-2xl border border-white/10 bg-[#0A0A0A] p-6 font-mono text-xs flex flex-col shadow-2xl">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                        <span class="text-emerald-400">GET /api/v1/users</span>
+                        <span class="text-brand-sky">200 OK</span>
+                    </div>
+                    <div class="text-white/60">
+                        {<br>
+                        &nbsp;&nbsp;"id": "u_8291",<br>
+                        &nbsp;&nbsp;"status": "active",<br>
+                        &nbsp;&nbsp;"role": "admin",<br>
+                        &nbsp;&nbsp;"verified": true<br>
+                        }
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-white/40">
+                        <span>Latency: 42ms</span>
+                        <span>Size: 1.2kb</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <!-- About Me Section -->
+    <section id="about"
+        class="overflow-hidden flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full border-white/5 border-t pt-32 pb-16 relative backdrop-blur-xl items-center">
+
+        <!-- Animated Background Effect -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <!-- Grid Pattern -->
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px); background-size: 40px 40px;">
+            </div>
+
+            <!-- Moving Glows -->
+            <div
+                class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[100px] rounded-full animate-blob mix-blend-screen">
+            </div>
+            <div
+                class="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-fuchsia-600/20 blur-[120px] rounded-full animate-blob animation-delay-2000 mix-blend-screen">
+            </div>
+
+            <!-- Ripple/Noise Overlay -->
+            <div class="absolute inset-0 opacity-20 bg-noise mix-blend-overlay"></div>
+        </div>
+
+        <div class="max-w-6xl w-full relative z-10 flex flex-col items-center">
+
+            <span
+                class="text-xs font-mono text-brand-sky uppercase tracking-[0.2em] font-medium mb-16 flex items-center gap-3">
+                <span class="w-1 h-1 bg-brand-sky rounded-full shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                About Me
+            </span>
+
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <!-- Profile Image -->
+                <div class="relative group shrink-0 reveal-up">
+                    <!-- Liquid Wavy Backgrounds -->
+                    <div
+                        class="absolute -inset-4 bg-gradient-to-r from-purple-600 to-brand-sky opacity-70 blur-2xl animate-[pulse_3s_ease-in-out_infinite]">
+                    </div>
+
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-purple-500 via-brand-sky to-purple-500 opacity-90"
+                        style="animation: wave-spin 8s linear infinite;"></div>
+
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-brand-sky via-purple-500 to-brand-sky opacity-90"
+                        style="animation: wave-spin 8s linear infinite reverse;"></div>
+
+                    <!-- Image Container -->
+                    <div class="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-white/10 ring-4 ring-black/50 shadow-2xl z-10"
+                        style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: wave-spin 20s linear infinite;">
+                        <img src="profile.jpg" alt="Ameen - QA Engineer"
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <!-- Decor element -->
+                    <div
+                        class="absolute bottom-4 right-8 bg-black/80 backdrop-blur-md border border-brand-sky/30 p-2 rounded-full shadow-lg z-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-sky">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Bio Text -->
+                <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl reveal-up"
+                    style="transition-delay: 0.2s; visibility: visible;">
+                    <h2
+                        class="text-3xl md:text-4xl lg:text-5xl font-serif font-medium tracking-tight text-white leading-tight mb-8">
+                        I turn assumptions into verified facts, <br>
+                        <span class="text-white/50">and code into quality.</span>
+                    </h2>
+
+                    <p class="text-lg md:text-xl text-white/70 font-light leading-relaxed">
+                        I'm <strong>Ameen</strong> — a detail-obsessed QA Engineer who finds bugs before your users do.
+                        With <strong>2.5+ years</strong> of hands-on experience in manual and automation testing.
+                        <br><br>
+                        Whether it’s functional testing, database validation, UI checks, or security assurance — I don’t
+                        just test. I challenge software to prove its worth.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience"
+        class="flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full px-6 pb-24 relative backdrop-blur-xl items-center border-t border-white/5 pt-24">
+        <div class="max-w-4xl w-full relative z-10">
+            <span
+                class="text-xs font-mono text-brand-sky uppercase tracking-[0.2em] font-medium mb-12 flex items-center justify-center gap-3">
+                <span class="w-1 h-1 bg-brand-sky rounded-full shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                Professional Experience
+            </span>
+
+            <div class="relative pl-8 md:pl-0">
+                <!-- Timeline Line (Mobile) -->
+                <div class="absolute left-0 top-0 bottom-0 w-px bg-white/10 md:hidden"></div>
+
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 reveal-up">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
+                        <div>
+                            <h3 class="text-2xl font-serif font-medium text-white mb-1">QA Engineer</h3>
+                            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/50">
+                                <span class="font-medium text-white/80">Ospyn Technologies Ltd</span>
+                                <span class="w-1 h-1 rounded-full bg-white/20"></span>
+                                <span>Trivandrum, Kerala</span>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/20 text-brand-sky text-xs font-mono font-medium w-fit">
+                            2022 – Present
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Designed and executed <strong>1500+ comprehensive test cases</strong> to ensure full
+                                software functionality.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Reduced <strong>defect leakage by 15%</strong> through rigorous manual and regression
+                                testing protocols.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Boosted test execution <strong>efficiency by 20%</strong> by automating high-volume
+                                tests with Selenium.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Managed the full lifecycle for <strong>2000+ defects using JIRA</strong> in fast-paced
+                                Agile/Scrum sprints.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Mentored <strong>3+ junior testers</strong>, elevating team proficiency in advanced
+                                test case development.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Pioneered the adoption of <strong>AI-driven prompt testing</strong> to validate ML
+                                model performance.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Verified data integrity by executing custom <strong>SQL queries</strong> against
+                                backend databases.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Partnered with developers and product teams to ensure <strong>quality
+                                    standards</strong> were met.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Contributed to all phases of the <strong>SDLC</strong>, from requirements analysis to
+                                release validation.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>Ensured a seamless user experience by performing detailed <strong>UI and usability
+                                    testing</strong>.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Knowledge Section -->
+    <section
+        class="flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full px-6 pb-32 relative backdrop-blur-xl items-center border-t border-white/5 pt-24">
+        <div class="max-w-6xl w-full relative z-10 flex flex-col items-center">
+            <span
+                class="text-xs font-mono text-brand-sky uppercase tracking-[0.2em] font-medium mb-16 flex items-center gap-3">
+                <span class="w-1 h-1 bg-brand-sky rounded-full shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                Software Knowledge
+            </span>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+
+                <!-- Testing & QA -->
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-sky/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-sky">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                        Testing & QA
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">JIRA</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">Selenium
+                            WebDriver</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">TestNG</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">Postman</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">JMeter</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">Git
+                            / GitHub</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-brand-sky/30 transition-colors">SVN</span>
+                    </div>
+                </div>
+
+                <!-- Development -->
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-emerald-500">
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                        Development
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-emerald-500/30 transition-colors">Eclipse</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-emerald-500/30 transition-colors">Visual
+                            Studio Code</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-emerald-500/30 transition-colors">Java
+                            (Basic)</span>
+                    </div>
+                </div>
+
+                <!-- Design & Engineering -->
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-purple-500">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="m4.93 4.93 4.24 4.24" />
+                            <path d="m14.83 9.17 4.24-4.24" />
+                            <path d="m14.83 14.83 4.24 4.24" />
+                            <path d="m9.17 14.83-4.24 4.24" />
+                            <circle cx="12" cy="12" r="4" />
+                        </svg>
+                        Design & Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-purple-500/30 transition-colors">AutoCAD</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-purple-500/30 transition-colors">Revit
+                            (MEP)</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-purple-500/30 transition-colors">Pipe
+                            Sizer</span>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-orange-500">
+                            <ellipse cx="12" cy="5" rx="9" ry="3" />
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                        </svg>
+                        Database
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-orange-500/30 transition-colors">SQL</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-orange-500/30 transition-colors">MySQL</span>
+                    </div>
+                </div>
+
+                <!-- Office -->
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-blue-500">
+                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                            <line x1="16" x2="16" y1="2" y2="6" />
+                            <line x1="8" x2="8" y1="2" y2="6" />
+                            <line x1="3" x2="21" y1="10" y2="10" />
+                        </svg>
+                        Productivity
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-blue-500/30 transition-colors">Excel</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-blue-500/30 transition-colors">Word</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-blue-500/30 transition-colors">Google
+                            Suite</span>
+                    </div>
+                </div>
+
+                <!-- Creative -->
+                <div
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-pink-500">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <path d="M9 15c.6 0 1.2-.2 1.6-.6.4-.5.7-1.1.7-1.9 0-1-.5-1.9-1.4-2.2" />
+                            <circle cx="10" cy="13" r=".1" />
+                            <path d="M15 15v-4" />
+                        </svg>
+                        Creative
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-pink-500/30 transition-colors">Photoshop</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-pink-500/30 transition-colors">Illustrator</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-pink-500/30 transition-colors">Premiere
+                            Pro</span>
+                        <span
+                            class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-pink-500/30 transition-colors">After
+                            Effects</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Software Marquee -->
+        <div class="w-full mt-24 mb-12 overflow-hidden relative opacity-60">
+            <style>
+                .software-marquee-mask {
+                    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                }
+            </style>
+            <div class="software-marquee-mask w-full">
+                <div class="flex animate-marquee hover:[animation-play-state:paused] w-max gap-x-24 items-center">
+                    <!-- List 1 -->
+                    <span class="text-white font-mono text-xl tracking-wider">JIRA</span>
+                    <span class="text-white font-mono text-xl tracking-wider">SELENIUM</span>
+                    <span class="text-white font-mono text-xl tracking-wider">TESTNG</span>
+                    <span class="text-white font-mono text-xl tracking-wider">POSTMAN</span>
+                    <span class="text-white font-mono text-xl tracking-wider">JMETER</span>
+                    <span class="text-white font-mono text-xl tracking-wider">GIT</span>
+                    <span class="text-white font-mono text-xl tracking-wider">GITHUB</span>
+                    <span class="text-white font-mono text-xl tracking-wider">SVN</span>
+                    <span class="text-white font-mono text-xl tracking-wider">ECLIPSE</span>
+                    <span class="text-white font-mono text-xl tracking-wider">VS CODE</span>
+                    <span class="text-white font-mono text-xl tracking-wider">JAVA</span>
+                    <span class="text-white font-mono text-xl tracking-wider">AUTOCAD</span>
+                    <span class="text-white font-mono text-xl tracking-wider">REVIT</span>
+                    <span class="text-white font-mono text-xl tracking-wider">DUCT SIZER</span>
+                    <span class="text-white font-mono text-xl tracking-wider">PIPE SIZER</span>
+                    <span class="text-white font-mono text-xl tracking-wider">SQL</span>
+                    <span class="text-white font-mono text-xl tracking-wider">MYSQL</span>
+                    <span class="text-white font-mono text-xl tracking-wider">EXCEL</span>
+                    <span class="text-white font-mono text-xl tracking-wider">WORD</span>
+                    <span class="text-white font-mono text-xl tracking-wider">GOOGLE WORKSPACE</span>
+                    <span class="text-white font-mono text-xl tracking-wider">PHOTOSHOP</span>
+                    <span class="text-white font-mono text-xl tracking-wider">ILLUSTRATOR</span>
+                    <span class="text-white font-mono text-xl tracking-wider">PREMIERE PRO</span>
+                    <span class="text-white font-mono text-xl tracking-wider">AFTER EFFECTS</span>
+
+                    <!-- List 2 (Duplicate) -->
+                    <span class="text-white font-mono text-xl tracking-wider">JIRA</span>
+                    <span class="text-white font-mono text-xl tracking-wider">SELENIUM</span>
+                    <span class="text-white font-mono text-xl tracking-wider">TESTNG</span>
+                    <span class="text-white font-mono text-xl tracking-wider">POSTMAN</span>
+                    <span class="text-white font-mono text-xl tracking-wider">JMETER</span>
+                    <span class="text-white font-mono text-xl tracking-wider">GIT</span>
+                    <span class="text-white font-mono text-xl tracking-wider">GITHUB</span>
+                    <span class="text-white font-mono text-xl tracking-wider">SVN</span>
+                    <span class="text-white font-mono text-xl tracking-wider">ECLIPSE</span>
+                    <span class="text-white font-mono text-xl tracking-wider">VS CODE</span>
+                    <span class="text-white font-mono text-xl tracking-wider">JAVA</span>
+                    <span class="text-white font-mono text-xl tracking-wider">AUTOCAD</span>
+                    <span class="text-white font-mono text-xl tracking-wider">REVIT</span>
+                    <span class="text-white font-mono text-xl tracking-wider">DUCT SIZER</span>
+                    <span class="text-white font-mono text-xl tracking-wider">PIPE SIZER</span>
+                    <span class="text-white font-mono text-xl tracking-wider">SQL</span>
+                    <span class="text-white font-mono text-xl tracking-wider">MYSQL</span>
+                    <span class="text-white font-mono text-xl tracking-wider">EXCEL</span>
+                    <span class="text-white font-mono text-xl tracking-wider">WORD</span>
+                    <span class="text-white font-mono text-xl tracking-wider">GOOGLE WORKSPACE</span>
+                    <span class="text-white font-mono text-xl tracking-wider">PHOTOSHOP</span>
+                    <span class="text-white font-mono text-xl tracking-wider">ILLUSTRATOR</span>
+                    <span class="text-white font-mono text-xl tracking-wider">PREMIERE PRO</span>
+                    <span class="text-white font-mono text-xl tracking-wider">AFTER EFFECTS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section
+        class="flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full px-6 pb-32 relative backdrop-blur-xl items-center">
+        <div class="max-w-4xl w-full relative z-10">
+            <h3 class="text-sm font-mono text-white/40 uppercase tracking-widest mb-8 text-center">Certifications</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Cert 1 -->
+                <div
+                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-sky">
+                            <path d="M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+                            <path d="M2 12h1" />
+                            <path d="M21 12h1" />
+                            <path d="M12 2v1" />
+                            <path d="M12 21v1" />
+                            <path d="m4.93 4.93.7.7" />
+                            <path d="m18.36 18.36.7.7" />
+                            <path d="m4.93 19.07.7-.7" />
+                            <path d="m18.36 5.64.7-.7" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium text-lg">AI-Powered Software Testing</h4>
+                        <span class="text-xs text-brand-sky font-mono">Specialized Certification</span>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div
+                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-sky">
+                            <rect width="18" height="18" x="3" y="3" rx="2" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium text-lg">Introduction to JIRA</h4>
+                        <span class="text-xs text-brand-sky font-mono">Project Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Footer CTA -->
+    <section
+        class="flex lg:px-12 bg-[#030303]/80 w-full z-10 border-white/5 border-t px-6 py-32 relative backdrop-blur-xl justify-center">
+        <div
+            class="w-full max-w-7xl bg-brand-sky rounded-[32px] relative overflow-hidden flex flex-col lg:flex-row items-start lg:items-end justify-between p-10 lg:p-24 group">
+            <div class="absolute inset-0 opacity-20 mix-blend-soft-light bg-black"></div>
+            <div class="relative z-10 flex flex-col max-w-2xl mb-12 lg:mb-0">
+                <h2
+                    class="text-4xl md:text-5xl lg:text-6xl font-serif font-medium tracking-tight text-[#030303] mb-4 leading-[1.05]">
+                    Ready to start your <span class="opacity-60 italic">next project?</span>
+                </h2>
+                <h3 class="text-2xl md:text-3xl font-serif text-[#030303] opacity-80 mb-6">
+                    I might be the teammate you’re looking for.
+                </h3>
+                <p class="text-lg text-[#030303]/80 font-sans leading-relaxed mb-8 max-w-xl font-medium">
+                    From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an
+                    eye for details that matter.<br><br>
+                    Curious about what I can do? My resume says the rest.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <span class="text-[#030303] font-bold tracking-tight text-lg">Check Out My Resume</span>
+                    <div class="hidden sm:block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-[#030303]">
+                            <path d="M17 12H3" />
+                            <path d="m17 7 5 5-5 5" />
+                        </svg>
+                    </div>
+
+                    <a href="https://drive.google.com/drive/folders/1S-1NMSxv8ekfqqLv7ETo2mfNtiTWjS3N?usp=sharing"
+                        target="_blank"
+                        class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#030303] text-white font-semibold text-base hover:bg-black/80 transition-all magnetic-btn shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        View Resume
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer
+        class="lg:px-12 flex flex-col z-10 overflow-hidden bg-[#030303] w-full border-white/5 border-t pt-12 pr-6 pb-12 pl-6 relative items-center">
+        <div class="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            <span class="text-white/30 text-xs font-mono tracking-wide">© 2025 - This Website build on coffee,
+                creativity, and Vibe Coding.</span>
+            <div class="flex gap-4">
+                <a href="https://github.com/ameensr" target="_blank"
+                    class="text-white/40 hover:text-white text-xs">Github</a>
+                <a href="https://www.linkedin.com/in/ameensr/" target="_blank"
+                    class="text-white/40 hover:text-white text-xs">LinkedIn</a>
+                <a href="#" class="text-white/40 hover:text-white text-xs">Twitter</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Contact Popup Modal -->
+    <div id="contact-popup" class="popup-overlay" onclick="if(event.target === this) closeContactPopup()">
+        <div class="contact-card text-center">
+            <h3 class="text-2xl font-serif text-white mb-8">Get in Touch</h3>
+
+            <div class="flex flex-col gap-6">
+                <a href="mailto:ameenchirayil@gmail.com"
+                    class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5 group">
+                    <div class="w-10 h-10 rounded-full bg-brand-sky/10 flex items-center justify-center text-brand-sky">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2" />
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-start">
+                        <span class="text-xs text-white/50 uppercase tracking-wider font-mono">Email</span>
+                        <span
+                            class="text-white font-medium group-hover:text-brand-sky transition-colors">ameenchirayil@gmail.com</span>
+                    </div>
+                </a>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                    <div
+                        class="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-start">
+                        <span class="text-xs text-white/50 uppercase tracking-wider font-mono">Phone</span>
+                        <span class="text-white font-medium">+91 8281331205</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="closeContactPopup()" class="mt-8 text-sm text-white/40 hover:text-white transition-colors">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function openContactPopup() {
+            const popup = document.getElementById('contact-popup');
+            popup.classList.add('active');
+        }
+
+        function closeContactPopup() {
+            const popup = document.getElementById('contact-popup');
+            popup.classList.remove('active');
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeContactPopup();
+            }
+        });
+
+        // Scroll Reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        // Particle Background System
+        const canvas = document.getElementById('bg-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let w, h;
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = w;
+                if (this.x > w) this.x = 0;
+                if (this.y < 0) this.y = h;
+                if (this.y > h) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.floor(window.innerWidth * 0.1); // Responsive count
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            // Connect close particles (constellation effect)
+            particles.forEach((p1, i) => {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.1 - dist / 1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        animateParticles();
+
+        // Magnetic Buttons
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+    </script>
+</body>
+
+</html>
