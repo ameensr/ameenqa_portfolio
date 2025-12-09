@@ -60,6 +60,22 @@
             text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
         }
 
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
+            }
+
+            50% {
+                text-shadow: 0 0 40px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.6);
+            }
+        }
+
+        .animate-text-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
         .grid-bg {
             background-size: 100px 200px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -263,12 +279,147 @@
                 border-color: rgba(56, 189, 248, 0.3);
             }
         }
+
+        /* Scroll Reveal */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Magnetic Button */
+        .magnetic-btn {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes wave-spin {
+            0% {
+                transform: rotate(0deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+
+            33% {
+                border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+            }
+
+            66% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+        }
+
+        @keyframes blob {
+
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .lightning-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: lightning-dash 3s linear infinite;
+            filter: url(#glow);
+        }
+
+        @keyframes lightning-dash {
+            0% {
+                stroke-dashoffset: 1000;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
 <body class="min-h-screen overflow-x-hidden selection:bg-brand-sky selection:text-black relative">
 
+    <!-- Particle Canvas -->
+    <canvas id="bg-particles" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+
+    <!-- Lightning & Ambient Background -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full mix-blend-screen opacity-30">
+            <div
+                class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-brand-sky/20 blur-[100px] animate-blob">
+            </div>
+            <div
+                class="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-[100px] animate-blob animation-delay-2000">
+            </div>
+            <div
+                class="absolute bottom-[-20%] left-[10%] w-[600px] h-[600px] rounded-full bg-brand-sky/10 blur-[120px] animate-blob animation-delay-4000">
+            </div>
+        </div>
+        <svg class="absolute inset-0 w-full h-full opacity-40" preserveAspectRatio="none">
+            <defs>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <linearGradient id="beam-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="rgba(56, 189, 248, 0)" />
+                    <stop offset="50%" stop-color="#38BDF8" />
+                    <stop offset="100%" stop-color="rgba(56, 189, 248, 0)" />
+                </linearGradient>
+            </defs>
+            <!-- Top curve -->
+            <path class="lightning-path" fill="none" stroke="url(#beam-grad)" stroke-width="2"
+                d="M0,100 Q400,300 800,100 T1600,200" style="animation-duration: 4s;" />
+            <!-- Middle curve -->
+            <path class="lightning-path" fill="none" stroke="url(#beam-grad)" stroke-width="3"
+                d="M-100,600 Q400,400 900,800 T1800,500" style="animation-duration: 6s; animation-delay: 1s;" />
+            <!-- Bottom curve -->
+            <path class="lightning-path" fill="none" stroke="url(#beam-grad)" stroke-width="2"
+                d="M0,900 Q600,700 1200,1000" style="animation-duration: 5s; animation-delay: 2s;" />
+        </svg>
+    </div>
 
     <!-- Navigation -->
     <nav
@@ -287,25 +438,18 @@
                     </path>
                 </svg>
             </div>
-            <span class="font-sans font-medium text-base tracking-tight text-white">QA Engineer</span>
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+                class="font-sans font-medium text-base tracking-tight text-white hover:text-brand-sky transition-colors">Ameen
+                S R</a>
         </div>
         <div class="hidden md:flex items-center gap-6 mr-8">
-            <a href="#" class="text-xs font-medium text-white/50 hover:text-white transition-colors">About</a>
-            <a href="#" class="text-xs font-medium text-white/50 hover:text-white transition-colors">Stack</a>
-            <a href="#" class="text-xs font-medium text-white/50 hover:text-white transition-colors">Projects</a>
+            <a href="#about" class="text-xs font-medium text-white/50 hover:text-white transition-colors">About</a>
+            <a href="#experience"
+                class="text-xs font-medium text-white/50 hover:text-white transition-colors">Experience</a>
         </div>
         <a href="https://drive.google.com/drive/folders/1S-1NMSxv8ekfqqLv7ETo2mfNtiTWjS3N?usp=sharing" target="_blank"
             class="hidden md:flex items-center gap-2 px-4 py-2 mr-2 rounded-full border border-white/20 text-white text-xs font-semibold hover:bg-white/10 transition-colors">
             Resume
-        </a>
-        <a href="https://github.com" target="_blank"
-            class="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-semibold hover:bg-brand-sky transition-colors group">
-            View Github <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                viewBox="0 0 24 24" data-icon="solar:arrow-right-bold-duotone"
-                class="iconify group-hover:translate-x-0.5 transition-transform">
-                <path fill="currentColor"
-                    d="M13.25 12.75V18a.75.75 0 0 0 1.28.53l6-6a.75.75 0 0 0 0-1.06l-6-6a.75.75 0 0 0-1.28.53z"></path>
-            </svg>
         </a>
     </nav>
 
@@ -321,7 +465,7 @@
                 Available for Projects
             </h4>
             <h1
-                class="lg:text-7xl leading-[1.1] text-brand-sky text-glow text-5xl italic tracking-tight font-serif mb-6">
+                class="lg:text-7xl leading-[1.1] text-brand-sky animate-text-glow text-5xl italic tracking-tight font-serif mb-6">
                 Engineering perfection.<br>
                 <span class="text-white opacity-90">Securing reliability.</span>
             </h1>
@@ -330,10 +474,12 @@
                 Implementing comprehensive automated testing strategies to ensure impeccable user experiences and zero
                 downtime.
             </p>
-            <div class="flex flex-col sm:flex-row gap-6 gap-x-6 gap-y-6 items-start sm:items-center">
-                <a href="#experience" class="shiny-cta focus:outline-none text-center"><span>View Experience</span></a>
+            <div class="flex flex-col sm:flex-row gap-6 gap-x-6 gap-y-6 items-start sm:items-center reveal-up"
+                style="transition-delay: 0.2s;">
+                <a href="#experience" class="shiny-cta focus:outline-none text-center magnetic-btn"><span>View
+                        Experience</span></a>
                 <button onclick="openContactPopup()"
-                    class="hover:bg-white/10 hover:text-white transition-all flex text-sm font-medium text-slate-300 bg-white/5 rounded-full pt-3 pr-6 pb-3 pl-6 gap-x-2 gap-y-2 items-center group cursor-pointer"
+                    class="hover:bg-white/10 hover:text-white transition-all flex text-sm font-medium text-slate-300 bg-white/5 rounded-full pt-3 pr-6 pb-3 pl-6 gap-x-2 gap-y-2 items-center group cursor-pointer magnetic-btn"
                     style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05); position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.15)); --border-radius-before: 9999px">
                     <span class="text-sm font-medium tracking-tight">Contact Me</span>
                 </button>
@@ -471,7 +617,7 @@
 
             <!-- End-to-End Automation -->
             <div
-                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500">
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
                 <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
                 </div>
@@ -503,8 +649,8 @@
             </div>
 
             <!-- Test Grid -->
-            <div
-                class="spotlight-card relative flex flex-col p-[1px] rounded-[32px] overflow-hidden lg:-mt-8 lg:mb-8 z-20 group">
+            <div class="spotlight-card relative flex flex-col p-[1px] rounded-[32px] overflow-hidden lg:-mt-8 lg:mb-8 z-20 group reveal-up"
+                style="transition-delay: 0.1s;">
                 <div class="absolute inset-0 bg-[#050505] rounded-[31px] m-[1px] overflow-hidden">
                     <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
                         style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
@@ -546,8 +692,8 @@
             </div>
 
             <!-- Performance -->
-            <div
-                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500">
+            <div class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up"
+                style="transition-delay: 0.2s;">
                 <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
                 </div>
@@ -583,7 +729,7 @@
 
             <!-- Manual Testing -->
             <div
-                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500">
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
                 <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
                 </div>
@@ -622,7 +768,7 @@
 
             <!-- API Testing -->
             <div
-                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500">
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
                 <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
                 </div>
@@ -658,8 +804,28 @@
 
     <!-- About Me Section -->
     <!-- About Me Section -->
-    <section
+    <section id="about"
         class="overflow-hidden flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full border-white/5 border-t pt-32 pb-16 relative backdrop-blur-xl items-center">
+
+        <!-- Animated Background Effect -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <!-- Grid Pattern -->
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px); background-size: 40px 40px;">
+            </div>
+
+            <!-- Moving Glows -->
+            <div
+                class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[100px] rounded-full animate-blob mix-blend-screen">
+            </div>
+            <div
+                class="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-fuchsia-600/20 blur-[120px] rounded-full animate-blob animation-delay-2000 mix-blend-screen">
+            </div>
+
+            <!-- Ripple/Noise Overlay -->
+            <div class="absolute inset-0 opacity-20 bg-noise mix-blend-overlay"></div>
+        </div>
+
         <div class="max-w-6xl w-full relative z-10 flex flex-col items-center">
 
             <span
@@ -670,18 +836,27 @@
 
             <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
                 <!-- Profile Image -->
-                <div class="relative group shrink-0">
+                <div class="relative group shrink-0 reveal-up">
+                    <!-- Liquid Wavy Backgrounds -->
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-brand-sky/20 to-white/20 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+                        class="absolute -inset-4 bg-gradient-to-r from-purple-600 to-brand-sky opacity-70 blur-2xl animate-[pulse_3s_ease-in-out_infinite]">
                     </div>
-                    <div
-                        class="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-white/10 ring-4 ring-black shadow-2xl">
+
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-purple-500 via-brand-sky to-purple-500 opacity-90"
+                        style="animation: wave-spin 8s linear infinite;"></div>
+
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-brand-sky via-purple-500 to-brand-sky opacity-90"
+                        style="animation: wave-spin 8s linear infinite reverse;"></div>
+
+                    <!-- Image Container -->
+                    <div class="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-white/10 ring-4 ring-black/50 shadow-2xl z-10"
+                        style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: wave-spin 20s linear infinite;">
                         <img src="profile.jpg" alt="Ameen - QA Engineer"
                             class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                     </div>
                     <!-- Decor element -->
                     <div
-                        class="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md border border-brand-sky/30 p-2 rounded-full shadow-lg">
+                        class="absolute bottom-4 right-8 bg-black/80 backdrop-blur-md border border-brand-sky/30 p-2 rounded-full shadow-lg z-20">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="text-brand-sky">
@@ -691,7 +866,8 @@
                 </div>
 
                 <!-- Bio Text -->
-                <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl reveal-up"
+                    style="transition-delay: 0.2s; visibility: visible;">
                     <h2
                         class="text-3xl md:text-4xl lg:text-5xl font-serif font-medium tracking-tight text-white leading-tight mb-8">
                         I turn assumptions into verified facts, <br>
@@ -725,7 +901,7 @@
                 <div class="absolute left-0 top-0 bottom-0 w-px bg-white/10 md:hidden"></div>
 
                 <div
-                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 reveal-up">
                     <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                         <div>
                             <h3 class="text-2xl font-serif font-medium text-white mb-1">QA Engineer</h3>
@@ -1116,18 +1292,40 @@
             <div class="absolute inset-0 opacity-20 mix-blend-soft-light bg-black"></div>
             <div class="relative z-10 flex flex-col max-w-2xl mb-12 lg:mb-0">
                 <h2
-                    class="text-4xl md:text-5xl lg:text-6xl font-serif font-medium tracking-tight text-[#030303] mb-8 leading-[1.05]">
+                    class="text-4xl md:text-5xl lg:text-6xl font-serif font-medium tracking-tight text-[#030303] mb-4 leading-[1.05]">
                     Ready to start your <span class="opacity-60 italic">next project?</span>
                 </h2>
-                <a href="#"
-                    class="inline-flex items-center gap-2 text-[#030303] font-semibold text-lg hover:underline decoration-2 underline-offset-4">
-                    Let's Talk <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-arrow-right">
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                    </svg>
-                </a>
+                <h3 class="text-2xl md:text-3xl font-serif text-[#030303] opacity-80 mb-6">
+                    I might be the teammate you’re looking for.
+                </h3>
+                <p class="text-lg text-[#030303]/80 font-sans leading-relaxed mb-8 max-w-xl font-medium">
+                    From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an
+                    eye for details that matter.<br><br>
+                    Curious about what I can do? My resume says the rest.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <span class="text-[#030303] font-bold tracking-tight text-lg">Check Out My Resume</span>
+                    <div class="hidden sm:block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-[#030303]">
+                            <path d="M17 12H3" />
+                            <path d="m17 7 5 5-5 5" />
+                        </svg>
+                    </div>
+
+                    <a href="https://drive.google.com/drive/folders/1S-1NMSxv8ekfqqLv7ETo2mfNtiTWjS3N?usp=sharing"
+                        target="_blank"
+                        class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#030303] text-white font-semibold text-base hover:bg-black/80 transition-all magnetic-btn shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        View Resume
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1135,11 +1333,13 @@
     <footer
         class="lg:px-12 flex flex-col z-10 overflow-hidden bg-[#030303] w-full border-white/5 border-t pt-12 pr-6 pb-12 pl-6 relative items-center">
         <div class="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-            <span class="text-white/30 text-xs font-mono tracking-wide">© 2025 - This software runs on coffee,
+            <span class="text-white/30 text-xs font-mono tracking-wide">© 2025 - This Website build on coffee,
                 creativity, and Vibe Coding.</span>
             <div class="flex gap-4">
-                <a href="#" class="text-white/40 hover:text-white text-xs">Github</a>
-                <a href="#" class="text-white/40 hover:text-white text-xs">LinkedIn</a>
+                <a href="https://github.com/ameensr" target="_blank"
+                    class="text-white/40 hover:text-white text-xs">Github</a>
+                <a href="https://www.linkedin.com/in/ameensr/" target="_blank"
+                    class="text-white/40 hover:text-white text-xs">LinkedIn</a>
                 <a href="#" class="text-white/40 hover:text-white text-xs">Twitter</a>
             </div>
         </div>
@@ -1204,6 +1404,115 @@
             if (event.key === 'Escape') {
                 closeContactPopup();
             }
+        });
+
+        // Scroll Reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        // Particle Background System
+        const canvas = document.getElementById('bg-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let w, h;
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = w;
+                if (this.x > w) this.x = 0;
+                if (this.y < 0) this.y = h;
+                if (this.y > h) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.floor(window.innerWidth * 0.1); // Responsive count
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            // Connect close particles (constellation effect)
+            particles.forEach((p1, i) => {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.1 - dist / 1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        animateParticles();
+
+        // Magnetic Buttons
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
         });
     </script>
 </body>
