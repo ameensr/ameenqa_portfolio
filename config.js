@@ -1,5 +1,5 @@
 const config = {
-    resumeLink: "https://mail.google.com/mail/u/0/#inbox",
+    resumeLink: "https://drive.google.com/file/d/1_UdfrYuiKovGcBepp_fZbCxy5-MRnQnS/view?usp=drive_link",
     gmail: "ameenchirayil@gmail.com",
     mobile: "+91 8281331205",
     profilePicture: "profile.jpg",
