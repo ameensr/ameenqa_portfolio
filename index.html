@@ -49,331 +49,7 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-color: #030303;
-            color: #ffffff;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .text-glow {
-            text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                text-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
-            }
-
-            50% {
-                text-shadow: 0 0 40px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.6);
-            }
-        }
-
-        .animate-text-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-
-        .grid-bg {
-            background-size: 100px 200px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-        }
-
-        .beam-line {
-            stroke-dasharray: 80 1000;
-            stroke-linecap: round;
-        }
-
-        @keyframes sonar-wave {
-            0% {
-                r: 10px;
-                opacity: 0.8;
-                stroke-width: 1px;
-            }
-
-            100% {
-                r: 80px;
-                opacity: 0;
-                stroke-width: 0px;
-            }
-        }
-
-        .animate-sonar {
-            animation: sonar-wave 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        .delay-1000 {
-            animation-delay: 1s;
-        }
-
-        .delay-2000 {
-            animation-delay: 2s;
-        }
-
-        /* Shiny CTA Button CSS */
-        @property --gradient-angle {
-            syntax: "<angle>";
-            initial-value: 0deg;
-            inherits: false;
-        }
-
-        @property --gradient-angle-offset {
-            syntax: "<angle>";
-            initial-value: 0deg;
-            inherits: false;
-        }
-
-        @property --gradient-percent {
-            syntax: "<percentage>";
-            initial-value: 20%;
-            inherits: false;
-        }
-
-        @property --gradient-shine {
-            syntax: "<color>";
-            initial-value: #38BDF8;
-            inherits: false;
-        }
-
-        .shiny-cta {
-            --gradient-angle: 0deg;
-            --gradient-angle-offset: 0deg;
-            --gradient-percent: 20%;
-            --gradient-shine: #38BDF8;
-            position: relative;
-            overflow: hidden;
-            border-radius: 9999px;
-            padding: 1.25rem 2.5rem;
-            font-size: 1rem;
-            line-height: 1.2;
-            font-weight: 500;
-            color: #ffffff;
-            background: linear-gradient(#030303, #030303) padding-box,
-                conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #0ea5e9 5%, var(--gradient-shine) 15%, #0ea5e9 30%, transparent 40%, transparent 100%) border-box;
-            border: 2px solid transparent;
-            box-shadow: inset 0 0 0 1px #1a1818;
-            outline: none;
-            transition: 800ms;
-            cursor: pointer;
-            isolation: isolate;
-            outline-offset: 4px;
-            z-index: 0;
-            animation: border-spin 2.5s linear infinite;
-            font-family: 'Inter', sans-serif;
-        }
-
-        @keyframes border-spin {
-            to {
-                --gradient-angle: 360deg;
-            }
-        }
-
-        .shiny-cta::before {
-            content: '';
-            pointer-events: none;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            --size: calc(100% - 6px);
-            width: var(--size);
-            height: var(--size);
-            background: radial-gradient(circle at 2px 2px, white 0.5px, transparent 0) padding-box;
-            background-size: 4px 4px;
-            mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
-            border-radius: inherit;
-            opacity: 0.4;
-        }
-
-        .shiny-cta::after {
-            content: '';
-            pointer-events: none;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            width: 100%;
-            aspect-ratio: 1;
-            background: linear-gradient(-50deg, transparent, #0ea5e9, transparent);
-            mask-image: radial-gradient(circle at bottom, transparent 40%, black);
-            opacity: 0.6;
-            animation: shimmer 4s linear infinite;
-        }
-
-        @keyframes shimmer {
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-
-        [style*="--border-gradient"]::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            padding: 1px;
-            border-radius: inherit;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            background: var(--border-gradient);
-            pointer-events: none;
-        }
-
-        /* Contact Popup Styles */
-        .popup-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .contact-card {
-            background: #0A0A0A;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px;
-            width: 90%;
-            max-width: 400px;
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
-            animation: glow-pulse 3s infinite;
-        }
-
-        .popup-overlay.active .contact-card {
-            transform: scale(1);
-        }
-
-        @keyframes glow-pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4), 0 0 20px 0 rgba(56, 189, 248, 0.2);
-                border-color: rgba(56, 189, 248, 0.3);
-            }
-
-            50% {
-                box-shadow: 0 0 20px 5px rgba(56, 189, 248, 0.3), 0 0 40px 10px rgba(56, 189, 248, 0.1);
-                border-color: rgba(56, 189, 248, 0.6);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4), 0 0 20px 0 rgba(56, 189, 248, 0.2);
-                border-color: rgba(56, 189, 248, 0.3);
-            }
-        }
-
-        /* Scroll Reveal */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal-up.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Magnetic Button */
-        .magnetic-btn {
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes wave-spin {
-            0% {
-                transform: rotate(0deg);
-                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            }
-
-            33% {
-                border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
-            }
-
-            66% {
-                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            }
-
-            100% {
-                transform: rotate(360deg);
-                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            }
-        }
-
-        @keyframes blob {
-
-            0% {
-                transform: translate(0px, 0px) scale(1);
-            }
-
-            33% {
-                transform: translate(30px, -50px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-
-            100% {
-                transform: translate(0px, 0px) scale(1);
-            }
-        }
-
-        .animate-blob {
-            animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
-
-        .lightning-path {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: lightning-dash 3s linear infinite;
-            filter: url(#glow);
-        }
-
-        @keyframes lightning-dash {
-            0% {
-                stroke-dashoffset: 1000;
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                stroke-dashoffset: 0;
-                opacity: 0;
-            }
-        }
+    <link rel="stylesheet" href="style.css">
     </style>
 </head>
 
@@ -447,7 +123,7 @@
             <a href="#experience"
                 class="text-xs font-medium text-white/50 hover:text-white transition-colors">Experience</a>
         </div>
-        <a href="https://drive.google.com/drive/folders/1S-1NMSxv8ekfqqLv7ETo2mfNtiTWjS3N?usp=sharing" target="_blank"
+        <a href="#" target="_blank" id="nav-resume-btn"
             class="hidden md:flex items-center gap-2 px-4 py-2 mr-2 rounded-full border border-white/20 text-white text-xs font-semibold hover:bg-white/10 transition-colors">
             Resume
         </a>
@@ -462,7 +138,7 @@
                 <span class="relative flex h-2 w-2"><span
                         class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-sky opacity-75"></span><span
                         class="relative inline-flex rounded-full h-2 w-2 bg-brand-sky"></span></span>
-                Available for Projects
+                Where Reliability Begins — Let’s Work Together
             </h4>
             <h1
                 class="lg:text-7xl leading-[1.1] text-brand-sky animate-text-glow text-5xl italic tracking-tight font-serif mb-6">
@@ -542,26 +218,7 @@
         <section class="w-[95%] z-20 pb-8 absolute bottom-0">
             <div
                 class="flex flex-col lg:flex-row overflow-hidden opacity-50 w-full pt-6 gap-x-6 gap-y-6 items-center justify-between">
-                <style>
-                    @keyframes marquee {
-                        0% {
-                            transform: translateX(0);
-                        }
 
-                        100% {
-                            transform: translateX(-50%);
-                        }
-                    }
-
-                    .animate-marquee {
-                        animation: marquee 40s linear infinite;
-                    }
-
-                    .mask-gradient-fade {
-                        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                    }
-                </style>
                 <div class="flex-1 overflow-hidden mask-gradient-fade w-full relative">
                     <div
                         class="flex animate-marquee hover:[animation-play-state:paused] w-max gap-x-32 gap-y-16 items-center">
@@ -605,15 +262,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 z-10 w-full max-w-7xl relative gap-x-6 gap-y-6">
-            <script>
-                document.querySelectorAll('.spotlight-card').forEach(card => {
-                    card.addEventListener('mousemove', e => {
-                        const rect = card.getBoundingClientRect();
-                        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                    });
-                });
-            </script>
+
 
             <!-- End-to-End Automation -->
             <div
@@ -799,6 +448,52 @@
                 </div>
             </div>
 
+            <!-- Security Testing -->
+            <div
+                class="spotlight-card group relative flex flex-col p-10 rounded-[32px] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 reveal-up">
+                <div class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);">
+                </div>
+                <div class="pointer-events-none absolute inset-0 rounded-[32px] border border-brand-sky/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style="mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent); -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), black, transparent);">
+                </div>
+                <h3 class="text-2xl font-semibold tracking-tight text-white mb-4 relative z-10">Security Testing
+                </h3>
+                <p class="text-base text-white/50 leading-relaxed mb-12 relative z-10 font-light">Vulnerability
+                    assessment and penetration testing to ensure robust data protection.</p>
+                <div
+                    class="relative z-10 mt-auto w-full h-72 rounded-2xl border border-white/10 bg-[#0A0A0A] p-6 font-mono text-xs flex flex-col shadow-2xl">
+                    <div class="flex items-center gap-2 border-b border-white/10 pb-3 mb-3">
+                        <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                        <span class="text-brand-sky">OWASP ZAP SCAN</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">[+]</span>
+                            <span class="text-white/70">Target: api.production.com</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">[+]</span>
+                            <span class="text-white/70">SQL Injection: 0 found</span>
+                            <span class="text-green-500 bg-green-500/10 px-1.5 rounded">[SAFE]</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">[+]</span>
+                            <span class="text-white/70">XSS Vulnerabilities: 0 found</span>
+                            <span class="text-green-500 bg-green-500/10 px-1.5 rounded">[SAFE]</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">[+]</span>
+                            <span class="text-white/70">Auth Bypass: 0 found</span>
+                            <span class="text-green-500 bg-green-500/10 px-1.5 rounded">[SAFE]</span>
+                        </div>
+                        <div class="flex items-center gap-2 mt-4 pt-4 border-t border-white/5">
+                            <span class="text-brand-sky">Scan Complete. System Secure.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -850,8 +545,8 @@
 
                     <!-- Image Container -->
                     <div class="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-white/10 ring-4 ring-black/50 shadow-2xl z-10"
-                        style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: wave-spin 20s linear infinite;">
-                        <img src="profile.jpg" alt="Ameen - QA Engineer"
+                        style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: wave-morph 20s linear infinite;">
+                        <img src="profile.jpg" alt="Ameen - QA Engineer" id="profile-picture"
                             class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                     </div>
                     <!-- Decor element -->
@@ -868,13 +563,13 @@
                 <!-- Bio Text -->
                 <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl reveal-up"
                     style="transition-delay: 0.2s; visibility: visible;">
-                    <h2
+                    <h2 id="about-title"
                         class="text-3xl md:text-4xl lg:text-5xl font-serif font-medium tracking-tight text-white leading-tight mb-8">
                         I turn assumptions into verified facts, <br>
                         <span class="text-white/50">and code into quality.</span>
                     </h2>
 
-                    <p class="text-lg md:text-xl text-white/70 font-light leading-relaxed">
+                    <p id="about-description" class="text-lg md:text-xl text-white/70 font-light leading-relaxed">
                         I'm <strong>Ameen</strong> — a detail-obsessed QA Engineer who finds bugs before your users do.
                         With <strong>2.5+ years</strong> of hands-on experience in manual and automation testing.
                         <br><br>
@@ -1167,12 +862,7 @@
         </div>
         <!-- Software Marquee -->
         <div class="w-full mt-24 mb-12 overflow-hidden relative opacity-60">
-            <style>
-                .software-marquee-mask {
-                    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                }
-            </style>
+
             <div class="software-marquee-mask w-full">
                 <div class="flex animate-marquee hover:[animation-play-state:paused] w-max gap-x-24 items-center">
                     <!-- List 1 -->
@@ -1290,15 +980,64 @@
         <div
             class="w-full max-w-7xl bg-brand-sky rounded-[32px] relative overflow-hidden flex flex-col lg:flex-row items-start lg:items-end justify-between p-10 lg:p-24 group">
             <div class="absolute inset-0 opacity-20 mix-blend-soft-light bg-black"></div>
+
+            <!-- Micro-Interactions -->
+            <div class="interaction-container">
+                <!-- Element 1: System Stability Orb -->
+                <div id="widget-system-orb" class="system-orb-container" style="display: none;">
+                    <div class="orb-core"></div>
+                    <div class="orb-ring"></div>
+                    <span class="orb-label">System Status: Stable</span>
+                    <div class="orb-hologram">
+                        <span class="hologram-line"><span class="hologram-highlight">99.8%</span> Uptime</span>
+                        <span class="hologram-line">All Systems Normal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Element 2: Bug Hunter Portal -->
+            <div id="widget-bug-portal" class="bug-portal-container" style="display: none;">
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+
+                <!-- Bug Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="bug-sprite">
+                    <path d="m8 2 1.88 1.88"></path>
+                    <path d="M14.12 3.88 16 2"></path>
+                    <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"></path>
+                    <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"></path>
+                    <path d="M12 20v-9"></path>
+                    <path d="M6.53 9C4.6 8.8 3 7.1 3 5"></path>
+                    <path d="M6 13H2"></path>
+                    <path d="M3 21c0-2.1 1.7-3.9 3.8-4"></path>
+                    <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"></path>
+                    <path d="M22 13h-4"></path>
+                    <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"></path>
+                </svg>
+
+                <!-- Checkmark Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="check-sprite">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                </svg>
+
+                <div class="portal-caption">Issue Fixed!</div>
+            </div>
+
             <div class="relative z-10 flex flex-col max-w-2xl mb-12 lg:mb-0">
-                <h2
+                <h2 id="cta-title"
                     class="text-4xl md:text-5xl lg:text-6xl font-serif font-medium tracking-tight text-[#030303] mb-4 leading-[1.05]">
                     Ready to start your <span class="opacity-60 italic">next project?</span>
                 </h2>
-                <h3 class="text-2xl md:text-3xl font-serif text-[#030303] opacity-80 mb-6">
+                <h3 id="cta-subtitle" class="text-2xl md:text-3xl font-serif text-[#030303] opacity-80 mb-6">
                     I might be the teammate you’re looking for.
                 </h3>
-                <p class="text-lg text-[#030303]/80 font-sans leading-relaxed mb-8 max-w-xl font-medium">
+                <p id="cta-description"
+                    class="text-lg text-[#030303]/80 font-sans leading-relaxed mb-8 max-w-xl font-medium">
                     From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an
                     eye for details that matter.<br><br>
                     Curious about what I can do? My resume says the rest.
@@ -1315,8 +1054,7 @@
                         </svg>
                     </div>
 
-                    <a href="https://drive.google.com/drive/folders/1S-1NMSxv8ekfqqLv7ETo2mfNtiTWjS3N?usp=sharing"
-                        target="_blank"
+                    <a href="#" id="cta-resume-btn" target="_blank"
                         class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#030303] text-white font-semibold text-base hover:bg-black/80 transition-all magnetic-btn shadow-lg hover:shadow-xl hover:-translate-y-1">
                         View Resume
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -1336,11 +1074,10 @@
             <span class="text-white/30 text-xs font-mono tracking-wide">© 2025 - This Website build on coffee,
                 creativity, and Vibe Coding.</span>
             <div class="flex gap-4">
-                <a href="https://github.com/ameensr" target="_blank"
-                    class="text-white/40 hover:text-white text-xs">Github</a>
-                <a href="https://www.linkedin.com/in/ameensr/" target="_blank"
+                <a href="#" id="footer-github" target="_blank" class="text-white/40 hover:text-white text-xs">Github</a>
+                <a href="#" id="footer-linkedin" target="_blank"
                     class="text-white/40 hover:text-white text-xs">LinkedIn</a>
-                <a href="#" class="text-white/40 hover:text-white text-xs">Twitter</a>
+                <a href="#" id="footer-twitter" class="text-white/40 hover:text-white text-xs">Twitter</a>
             </div>
         </div>
     </footer>
@@ -1350,7 +1087,7 @@
             <h3 class="text-2xl font-serif text-white mb-8">Get in Touch</h3>
 
             <div class="flex flex-col gap-6">
-                <a href="mailto:ameenchirayil@gmail.com"
+                <a href="#" id="contact-email-link"
                     class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5 group">
                     <div class="w-10 h-10 rounded-full bg-brand-sky/10 flex items-center justify-center text-brand-sky">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -1361,7 +1098,7 @@
                     </div>
                     <div class="flex flex-col items-start">
                         <span class="text-xs text-white/50 uppercase tracking-wider font-mono">Email</span>
-                        <span
+                        <span id="contact-email-text"
                             class="text-white font-medium group-hover:text-brand-sky transition-colors">ameenchirayil@gmail.com</span>
                     </div>
                 </a>
@@ -1377,7 +1114,7 @@
                     </div>
                     <div class="flex flex-col items-start">
                         <span class="text-xs text-white/50 uppercase tracking-wider font-mono">Phone</span>
-                        <span class="text-white font-medium">+91 8281331205</span>
+                        <span id="contact-phone-text" class="text-white font-medium">+91 8281331205</span>
                     </div>
                 </div>
             </div>
@@ -1388,133 +1125,8 @@
         </div>
     </div>
 
-    <script>
-        function openContactPopup() {
-            const popup = document.getElementById('contact-popup');
-            popup.classList.add('active');
-        }
-
-        function closeContactPopup() {
-            const popup = document.getElementById('contact-popup');
-            popup.classList.remove('active');
-        }
-
-        // Close on Escape key
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') {
-                closeContactPopup();
-            }
-        });
-
-        // Scroll Reveal
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
-
-        // Particle Background System
-        const canvas = document.getElementById('bg-particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let w, h;
-
-        function resize() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-            initParticles();
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2;
-                this.alpha = Math.random() * 0.5 + 0.1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0) this.x = w;
-                if (this.x > w) this.x = 0;
-                if (this.y < 0) this.y = h;
-                if (this.y > h) this.y = 0;
-            }
-
-            draw() {
-                ctx.fillStyle = `rgba(56, 189, 248, ${this.alpha})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.floor(window.innerWidth * 0.1); // Responsive count
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, w, h);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            // Connect close particles (constellation effect)
-            particles.forEach((p1, i) => {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 100) {
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.1 - dist / 1000})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            });
-            requestAnimationFrame(animateParticles);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-        animateParticles();
-
-        // Magnetic Buttons
-        document.querySelectorAll('.magnetic-btn').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-            });
-
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0)';
-            });
-        });
-    </script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

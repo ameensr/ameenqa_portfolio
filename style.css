@@ -1,1 +1,676 @@
-/* CSS moved to index.html for this template */
+body {
+    background-color: #030303;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+}
+
+.text-glow {
+    text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+
+    50% {
+        text-shadow: 0 0 40px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.6);
+    }
+}
+
+.animate-text-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.grid-bg {
+    background-size: 100px 200px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+.beam-line {
+    stroke-dasharray: 80 1000;
+    stroke-linecap: round;
+}
+
+@keyframes sonar-wave {
+    0% {
+        r: 10px;
+        opacity: 0.8;
+        stroke-width: 1px;
+    }
+
+    100% {
+        r: 80px;
+        opacity: 0;
+        stroke-width: 0px;
+    }
+}
+
+.animate-sonar {
+    animation: sonar-wave 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.delay-1000 {
+    animation-delay: 1s;
+}
+
+.delay-2000 {
+    animation-delay: 2s;
+}
+
+/* Shiny CTA Button CSS */
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --gradient-angle-offset {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --gradient-percent {
+    syntax: "<percentage>";
+    initial-value: 20%;
+    inherits: false;
+}
+
+@property --gradient-shine {
+    syntax: "<color>";
+    initial-value: #38BDF8;
+    inherits: false;
+}
+
+.shiny-cta {
+    --gradient-angle: 0deg;
+    --gradient-angle-offset: 0deg;
+    --gradient-percent: 20%;
+    --gradient-shine: #38BDF8;
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    padding: 1.25rem 2.5rem;
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #ffffff;
+    background: linear-gradient(#030303, #030303) padding-box,
+        conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #0ea5e9 5%, var(--gradient-shine) 15%, #0ea5e9 30%, transparent 40%, transparent 100%) border-box;
+    border: 2px solid transparent;
+    box-shadow: inset 0 0 0 1px #1a1818;
+    outline: none;
+    transition: 800ms;
+    cursor: pointer;
+    isolation: isolate;
+    outline-offset: 4px;
+    z-index: 0;
+    animation: border-spin 2.5s linear infinite;
+    font-family: 'Inter', sans-serif;
+}
+
+@keyframes border-spin {
+    to {
+        --gradient-angle: 360deg;
+    }
+}
+
+.shiny-cta::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    --size: calc(100% - 6px);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle at 2px 2px, white 0.5px, transparent 0) padding-box;
+    background-size: 4px 4px;
+    mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+    border-radius: inherit;
+    opacity: 0.4;
+}
+
+.shiny-cta::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(-50deg, transparent, #0ea5e9, transparent);
+    mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+    opacity: 0.6;
+    animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+[style*="--border-gradient"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background: var(--border-gradient);
+    pointer-events: none;
+}
+
+/* Contact Popup Styles */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.contact-card {
+    background: #0A0A0A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+    animation: glow-pulse 3s infinite;
+}
+
+.popup-overlay.active .contact-card {
+    transform: scale(1);
+}
+
+@keyframes glow-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4), 0 0 20px 0 rgba(56, 189, 248, 0.2);
+        border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px 5px rgba(56, 189, 248, 0.3), 0 0 40px 10px rgba(56, 189, 248, 0.1);
+        border-color: rgba(56, 189, 248, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4), 0 0 20px 0 rgba(56, 189, 248, 0.2);
+        border-color: rgba(56, 189, 248, 0.3);
+    }
+}
+
+/* Scroll Reveal */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Magnetic Button */
+.magnetic-btn {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes wave-spin {
+    0% {
+        transform: rotate(0deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    33% {
+        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+    }
+
+    66% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+}
+
+@keyframes wave-morph {
+    0% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    33% {
+        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+    }
+
+    66% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+
+    100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+}
+
+@keyframes blob {
+
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+.lightning-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: lightning-dash 3s linear infinite;
+    filter: url(#glow);
+}
+
+@keyframes lightning-dash {
+    0% {
+        stroke-dashoffset: 1000;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 0;
+    }
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 40s linear infinite;
+}
+
+.mask-gradient-fade {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+
+/* Micro-Interactions Container */
+.interaction-container {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    z-index: 20;
+}
+
+@media (max-width: 768px) {
+    .interaction-container {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: flex-start;
+    }
+}
+
+/* --- Element 1: System Stability Orb --- */
+.system-orb-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.orb-core {
+    width: 12px;
+    height: 12px;
+    background: #38bdf8;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8;
+    position: relative;
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orb-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 50%;
+    animation: orb-pulse 3s infinite linear;
+}
+
+.orb-ring::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    width: 4px;
+    height: 1px;
+    background: #38bdf8;
+    box-shadow: 0 0 5px #38bdf8;
+}
+
+@keyframes orb-pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(180deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(360deg);
+        opacity: 0.5;
+    }
+}
+
+/* ... (previous code) */
+.orb-label {
+    position: absolute;
+    right: 40px;
+    /* Changed from left to right */
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Inter', monospace;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    opacity: 1;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: right;
+}
+
+/* Hover State for Orb */
+.system-orb-container:hover .orb-core {
+    transform: scale(1.5);
+    background: #fff;
+    box-shadow: 0 0 15px #38bdf8, 0 0 30px #38bdf8, 0 0 45px #38bdf8;
+}
+
+.system-orb-container:hover .orb-ring {
+    width: 40px;
+    height: 40px;
+    border-color: rgba(56, 189, 248, 0.6);
+    animation-duration: 1.5s;
+}
+
+.system-orb-container:hover .orb-label {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+    /* Changed direction */
+}
+
+.orb-hologram {
+    position: absolute;
+    right: 40px;
+    /* Anchored to right of container (left of orb essentially) */
+    top: 50%;
+    transform: translateY(-50%) translateX(-20px) scale(0.9);
+    /* Start slighty left */
+    background: rgba(5, 5, 5, 0.9);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #38bdf8;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    width: max-content;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+    z-index: 10;
+}
+
+.system-orb-container:hover .orb-hologram {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+    pointer-events: auto;
+}
+
+.system-orb-container:hover .orb-hologram {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+    pointer-events: auto;
+}
+
+.hologram-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+    padding-left: 12px;
+}
+
+.hologram-line::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: rgba(56, 189, 248, 0.5);
+}
+
+.hologram-highlight {
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+
+/* --- Element 2: Bug Hunter Portal --- */
+.bug-portal-container {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 25;
+}
+
+.portal-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px dashed rgba(34, 197, 94, 0.3);
+    border-top-color: transparent;
+    animation: portal-spin 10s linear infinite;
+}
+
+.portal-ring:nth-child(2) {
+    inset: 5px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 50%;
+    border-left-color: transparent;
+    animation: portal-spin 5s linear infinite reverse;
+}
+
+@keyframes portal-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.bug-sprite {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 2;
+}
+
+.check-sprite {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    color: #22c55e;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3;
+    filter: drop-shadow(0 0 5px #22c55e);
+}
+
+.portal-caption {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #22c55e;
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+/* Hover Interaction for Portal */
+.bug-portal-container:hover .bug-sprite {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+}
+
+.bug-portal-container:hover .check-sprite {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.2s;
+}
+
+.bug-portal-container:hover .portal-ring {
+    border-color: rgba(34, 197, 94, 0.6);
+    animation-duration: 2s;
+}
+
+.bug-portal-container:hover .portal-ring:nth-child(2) {
+    border-color: rgba(34, 197, 94, 0.4);
+    animation-duration: 1s;
+}
+
+.bug-portal-container:hover .portal-caption {
+    opacity: 1;
+    bottom: -30px;
+}
+
+/* Flying Animation for Portal */
+@keyframes bug-fly {
+    0% {
+        top: 10%;
+        right: 10%;
+        transform: rotate(0deg);
+    }
+
+    20% {
+        top: 60%;
+        right: 30%;
+        transform: rotate(10deg);
+    }
+
+    40% {
+        top: 20%;
+        right: 80%;
+        transform: rotate(-10deg);
+    }
+
+    60% {
+        top: 80%;
+        right: 60%;
+        transform: rotate(5deg);
+    }
+
+    80% {
+        top: 40%;
+        right: 20%;
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        top: 10%;
+        right: 10%;
+        transform: rotate(0deg);
+    }
+}
+
+.bug-portal-moving {
+    position: absolute !important;
+    animation: bug-fly 20s infinite alternate ease-in-out;
+    z-index: 30;
+}
