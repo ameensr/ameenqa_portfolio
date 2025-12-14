@@ -20,7 +20,8 @@ const config = {
         title: "Ready to start your <span class=\"opacity-60 italic\">next project?</span>",
         subtitle: "I might be the teammate you’re looking for.",
         description: "From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an eye for details that matter.<br><br>Curious about what I can do? My resume says the rest.",
-        activeMicroInteraction: "systemOrb" // Options: "systemOrb" or "bugPortal"
+        activeMicroInteraction: "bugPortal" // Options: "systemOrb" or "bugPortal"
     }
 };
+
 
