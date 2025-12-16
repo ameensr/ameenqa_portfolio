@@ -1,5 +1,5 @@
 const config = {
-    resumeLink: "https://mail.google.com/mail/u/0/#inbox",
+    resumeLink: "https://drive.google.com/file/d/1_UdfrYuiKovGcBepp_fZbCxy5-MRnQnS/view?usp=drive_link",
     gmail: "ameenchirayil@gmail.com",
     mobile: "+91 8281331205",
     profilePicture: "profile.jpg",
@@ -20,6 +20,6 @@ const config = {
         title: "Ready to start your <span class=\"opacity-60 italic\">next project?</span>",
         subtitle: "I might be the teammate you’re looking for.",
         description: "From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an eye for details that matter.<br><br>Curious about what I can do? My resume says the rest.",
-        activeMicroInteraction: "systemOrb" // Options: "systemOrb" or "bugPortal"
+        activeMicroInteraction: "bugPortal" // Options: "systemOrb" or "bugPortal"
     }
 };
