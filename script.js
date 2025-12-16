@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const phoneText = document.getElementById('contact-phone-text');
         if (phoneText) phoneText.textContent = config.mobile;
 
+        // Hero Section
+        const heroDescription = document.getElementById('hero-description');
+        if (heroDescription && config.hero) heroDescription.innerHTML = config.hero.description;
+
         // About Me
         const aboutTitle = document.getElementById('about-title');
         const aboutDescription = document.getElementById('about-description');
@@ -32,6 +36,85 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ctaSubtitle) ctaSubtitle.innerText = config.cta.subtitle;
         if (ctaDescription) ctaDescription.innerHTML = config.cta.description;
 
+        // CTA Buttons
+        const ctaEmailBtn = document.getElementById('cta-email-btn');
+        const ctaLinkedinBtn = document.getElementById('cta-linkedin-btn');
+        const ctaResumeBtn = document.getElementById('cta-resume-btn');
+
+        if (ctaEmailBtn && config.cta.buttonLinks) ctaEmailBtn.href = `mailto:${config.cta.buttonLinks.email}`;
+        if (ctaLinkedinBtn && config.cta.buttonLinks) ctaLinkedinBtn.href = config.cta.buttonLinks.linkedin;
+        if (ctaResumeBtn && config.cta.buttonLinks) ctaResumeBtn.href = config.cta.buttonLinks.resume;
+
+        // CTA Button Labels
+        if (config.cta.buttonLabels) {
+            const emailLabel = document.getElementById('cta-email-label');
+            const linkedinLabel = document.getElementById('cta-linkedin-label');
+            const resumeLabel = document.getElementById('cta-resume-label');
+
+            if (emailLabel) emailLabel.textContent = config.cta.buttonLabels.email;
+            if (linkedinLabel) linkedinLabel.textContent = config.cta.buttonLabels.linkedin;
+            if (resumeLabel) resumeLabel.textContent = config.cta.buttonLabels.resume;
+        }
+
+        // Notice Box Logic
+        const ctaNotice = document.getElementById('cta-notice-period');
+        const noticeBox = document.getElementById('notice-box');
+
+        if (noticeBox) {
+            if (config.cta.showNoticePeriod) {
+                noticeBox.style.display = 'flex';
+                if (ctaNotice && config.cta.noticePeriod) ctaNotice.textContent = config.cta.noticePeriod;
+            } else {
+                noticeBox.style.display = 'none';
+            }
+        }
+
+        // Notice Bubble Logic
+        if (config.cta.noticeBubble) {
+            const bubble = document.getElementById('notice-bubble');
+            const bubbleText = document.getElementById('notice-bubble-text');
+
+            if (bubble && bubbleText) {
+                if (config.cta.noticeBubble.isVisible) {
+                    bubble.style.display = 'block';
+                    bubbleText.textContent = config.cta.noticeBubble.text;
+                } else {
+                    bubble.style.display = 'none';
+                }
+            }
+        }
+
+
+
+        // Contact Me Section Logic
+        const contactSection = document.getElementById('contact-me-section');
+        if (contactSection && config.contactSection) {
+            if (config.contactSection.isVisible) {
+                contactSection.style.display = 'flex';
+
+                const titleEl = document.getElementById('contact-section-title');
+                const emailVal = document.getElementById('contact-email-value');
+                const linkedinVal = document.getElementById('contact-linkedin-value');
+                const githubVal = document.getElementById('contact-github-value');
+
+                const emailItem = document.getElementById('contact-email-item');
+                const linkedinItem = document.getElementById('contact-linkedin-item');
+                const githubItem = document.getElementById('contact-github-item');
+
+                if (titleEl) titleEl.textContent = config.contactSection.title;
+                if (emailVal) emailVal.textContent = config.contactSection.email;
+                if (linkedinVal) linkedinVal.textContent = config.contactSection.linkedin;
+                if (githubVal) githubVal.textContent = config.contactSection.github;
+
+                if (emailItem) emailItem.href = `mailto:${config.contactSection.email}`;
+                if (linkedinItem) linkedinItem.href = `https://${config.contactSection.linkedin}`;
+                if (githubItem) githubItem.href = `https://${config.contactSection.github}`;
+
+            } else {
+                contactSection.style.display = 'none';
+            }
+        }
+
         // Social Links
         const githubLink = document.getElementById('footer-github');
         const linkedinLink = document.getElementById('footer-linkedin');
@@ -40,6 +123,93 @@ document.addEventListener('DOMContentLoaded', () => {
         if (githubLink) githubLink.href = config.socialLinks.github;
         if (linkedinLink) linkedinLink.href = config.socialLinks.linkedin;
         if (twitterLink) twitterLink.href = config.socialLinks.twitter;
+
+        // Projects
+        if (config.projects && config.projects.length > 0) {
+            config.projects.forEach((project, index) => {
+                const linkEl = document.getElementById(`project-link-${index}`);
+                const titleEl = document.getElementById(`project-title-${index}`);
+                const descEl = document.getElementById(`project-desc-${index}`);
+
+                if (linkEl) linkEl.href = project.link;
+                if (titleEl) titleEl.textContent = project.title;
+                if (descEl) descEl.textContent = project.description;
+            });
+        }
+
+        // Software Knowledge Subtitle
+        if (config.softwareSubtitle) {
+            const subtitleEl = document.getElementById('software-subtitle');
+            if (subtitleEl) subtitleEl.textContent = config.softwareSubtitle;
+        }
+
+        // Software Knowledge Section
+        if (config.softwareKnowledge) {
+            const gridContainer = document.getElementById('software-knowledge-grid');
+            const marqueeContainer = document.getElementById('software-marquee-content');
+
+            // Icon Map (SVG Paths)
+            const iconMap = {
+                "Quality Assurance & Testing": `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" />`,
+                "Automation, Development & AI-Assisted Building": `<circle cx="12" cy="12" r="10" /><line x1="2" x2="22" y1="12" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />`,
+                "Database & Backend Validation": `<ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />`,
+                "Engineering & Design Tools": `<circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24" /><path d="m14.83 9.17 4.24-4.24" /><path d="m14.83 14.83 4.24 4.24" /><path d="m9.17 14.83-4.24 4.24" /><circle cx="12" cy="12" r="4" />`,
+                "Productivity & Collaboration": `<rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />`,
+                "Creative & Visual Tools": `<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M9 15c.6 0 1.2-.2 1.6-.6.4-.5.7-1.1.7-1.9 0-1-.5-1.9-1.4-2.2" /><circle cx="10" cy="13" r=".1" /><path d="M15 15v-4" />`
+            };
+
+            const colorMap = {
+                "Quality Assurance & Testing": "brand-sky",
+                "Automation, Development & AI-Assisted Building": "cyan-500",
+                "Database & Backend Validation": "orange-500",
+                "Engineering & Design Tools": "purple-500",
+                "Productivity & Collaboration": "blue-500",
+                "Creative & Visual Tools": "pink-500"
+            };
+
+            // Render Grid
+            if (gridContainer) {
+                gridContainer.innerHTML = '';
+                config.softwareKnowledge.forEach(item => {
+                    const colorClass = colorMap[item.category] || "brand-sky";
+                    const iconPath = iconMap[item.category] || `<circle cx="12" cy="12" r="10" />`;
+
+                    const skillsHtml = item.skills.map(skill =>
+                        `<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-${colorClass === 'brand-sky' ? 'brand-sky/30' : colorClass + '/30'} transition-colors">${skill}</span>`
+                    ).join('');
+
+                    const cardHtml = `
+                        <div class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-${colorClass}/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-${colorClass}">
+                                    ${iconPath}
+                                </svg>
+                                ${item.category}
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                ${skillsHtml}
+                            </div>
+                        </div>
+                    `;
+                    gridContainer.innerHTML += cardHtml;
+                });
+            }
+
+            // Render Marquee
+            if (marqueeContainer) {
+                marqueeContainer.innerHTML = '';
+                const allSkills = config.softwareKnowledge.flatMap(item => item.skills);
+
+                // Function to generate spans
+                const generateSpans = () => {
+                    return allSkills.map(skill => `<span class="text-white font-mono text-xl tracking-wider">${skill.toUpperCase()}</span>`).join('');
+                };
+
+                // Duplicate content for smooth loop (Original + Duplicate)
+                marqueeContainer.innerHTML = generateSpans() + generateSpans();
+            }
+        }
 
         // Micro-Interaction Widget Toggle
         const orbWidget = document.getElementById('widget-system-orb');
