@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const linkedinItem = document.getElementById('contact-linkedin-item');
                 const githubItem = document.getElementById('contact-github-item');
 
-                if (titleEl) titleEl.textContent = config.contactSection.title;
+                // if (titleEl) titleEl.textContent = config.contactSection.title;
                 if (emailVal) emailVal.textContent = config.contactSection.email;
                 if (linkedinVal) linkedinVal.textContent = config.contactSection.linkedin;
                 if (githubVal) githubVal.textContent = config.contactSection.github;

@@ -21,7 +21,7 @@ const config = {
     },
     aboutMe: {
         title: "I turn assumptions into verified facts, <br> <span class='text-white/50'>and code into quality.</span>",
-        description: `I'm <strong>${common.name}</strong> — a detail-obsessed QA Engineer who finds bugs before your users do. 
+        description: `I'm <strong>${common.name}</strong> — a detail-obsessed QA Engineer who finds bugs before your clients do. 
         With <strong>3+ years</strong> of hands-on experience in manual and automation testing.
         <br><br>
         Whether it’s functional testing, database validation, UI checks, or security assurance — I don’t 
@@ -38,7 +38,7 @@ const config = {
         description: "From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an eye for details that matter.<br><br>Curious about what I can do? My resume says the rest.",
         activeMicroInteraction: "bugPortal", // Options: "systemOrb" or "bugPortal"
         showNoticePeriod: true, // Set to false to hide the box completely
-        noticePeriod: "Open to Software QA / Test Engineer opportunities",
+        noticePeriod: "Building reliable software through structured testing and quality-driven practices",
         buttonLabels: {
             email: "Email",
             linkedin: "LinkedIn",
@@ -51,7 +51,7 @@ const config = {
         },
         noticeBubble: {
             isVisible: true, // Set to false to hide the noticeBubble
-            text: "Open to Remote / Hybrid / On-site international roles, Willing to relocate or work across time zones"
+            text: "Interested in global software quality standards and international best practices"
         }
     },
     projects: [
