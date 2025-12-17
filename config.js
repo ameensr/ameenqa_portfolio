@@ -56,14 +56,14 @@ const config = {
     },
     projects: [
         {
-            title: "Work Sample 1",
+            title: "Sample Test Case",
             description: "View detailed project documentation and reports",
-            link: "https://drive.google.com/file/d/12kGZzTMA0xcLMZSs6BjNfvvqhNwJ2ImN/view?usp=drive_link"
+            link: "https://drive.google.com/file/d/1Z9N5AhVImsHTfqaXm2VUdSxHrM9_NNlA/view?usp=drive_link"
         },
         {
-            title: "Work Sample 2",
+            title: "Sample Bug Report",
             description: "Check out the test strategy and execution logs",
-            link: "https://drive.google.com/file/d/12kGZzTMA0xcLMZSs6BjNfvvqhNwJ2ImN/view?usp=drive_link"
+            link: "https://drive.google.com/file/d/1foJB2ZHNhzoKRJpvRhjPkXsafPYys_Il/view?usp=drive_link"
         }
     ],
     contactSection: {
