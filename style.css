@@ -2,10 +2,363 @@ body {
     background-color: #030303;
     color: #ffffff;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.text-glow {
-    text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+/* --- PREMIUM LIGHT MODE OVERRIDES --- */
+body.light-mode {
+    background: linear-gradient(180deg, #F4F7FA 0%, #FFFFFF 100%);
+    background-attachment: fixed;
+    color: #4A4E57;
+    /* Soft Body Text */
+}
+
+/* HERO SECTION - Premium Agency Gradients */
+body main {
+    position: relative;
+}
+
+/* Dark Mode Hero - Deep Tech Purple Agency Gradient */
+body:not(.light-mode) main::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 120%;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 30%, #2B1F76 0%, transparent 50%),
+        /* Royal Indigo */
+        radial-gradient(circle at 80% 20%, #1A0E2A 0%, transparent 50%),
+        /* Deep Purple */
+        radial-gradient(circle at 50% 50%, rgba(58, 79, 207, 0.4) 0%, transparent 60%);
+    /* Cool Tech Blue */
+    filter: blur(80px);
+    /* Deep blur for seamless blend */
+    opacity: 0.8;
+    pointer-events: none;
+    animation: hero-pulse-dark 10s ease-in-out infinite;
+}
+
+/* Light Mode Hero - Soft Luxury Gradient (#F4F7FA -> #D9E4FF) */
+body.light-mode main::before {
+    content: '';
+    position: absolute;
+    top: -15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130%;
+    height: 110%;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 10% 20%, #F4F7FA 0%, transparent 40%),
+        /* Base White/Blue */
+        radial-gradient(circle at 85% 15%, #E8EFFA 0%, transparent 40%),
+        /* Soft Lavender Blue */
+        radial-gradient(circle at 40% 60%, rgba(217, 228, 255, 0.6) 0%, transparent 50%);
+    /* Richer Blue Accent */
+    filter: blur(90px);
+    opacity: 1;
+    pointer-events: none;
+    animation: hero-pulse-light 10s ease-in-out infinite;
+}
+
+@keyframes hero-pulse-dark {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+@keyframes hero-pulse-light {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.02);
+    }
+}
+
+/* Update Hero SVG Beams for Light Mode */
+body.light-mode .beam-line {
+    stroke: #1E9EFF;
+    opacity: 0.5;
+}
+
+body.light-mode .animate-sonar {
+    stroke: #1E9EFF;
+}
+
+
+
+/* Navbar - Glassmorphism */
+body.light-mode nav {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode nav a,
+body.light-mode nav button,
+body.light-mode #theme-toggle {
+    color: #4A4E57;
+    border-color: rgba(0, 0, 0, 0.06);
+    font-weight: 500;
+}
+
+body.light-mode nav a:hover,
+body.light-mode nav button:hover {
+    background-color: rgba(30, 158, 255, 0.08);
+    /* Soft Brand Tint */
+    color: #1E9EFF;
+    /* Premium Accent */
+    border-color: rgba(30, 158, 255, 0.2);
+}
+
+/* Background Elements */
+body.light-mode .grid-bg {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    opacity: 0.5;
+}
+
+body.light-mode #bg-particles {
+    opacity: 0.4;
+    filter: invert(1) hue-rotate(190deg) opacity(0.5);
+    /* Subtle Blue Tint */
+}
+
+/* Typography & Colors */
+body.light-mode .text-white {
+    color: #1C1E21 !important;
+    /* Premium Heading Black */
+}
+
+body.light-mode .text-white\/30,
+body.light-mode .text-white\/40,
+body.light-mode .text-white\/50,
+body.light-mode .text-white\/60,
+body.light-mode .text-white\/70,
+body.light-mode .text-white\/80 {
+    color: #64748B !important;
+    /* Elegant Slate for secondary text */
+}
+
+body.light-mode .text-slate-300 {
+    color: #475569 !important;
+}
+
+/* Brand Text Override */
+body.light-mode .text-brand-sky {
+    color: #1E9EFF !important;
+    /* Premium Blue */
+}
+
+/* SECTION HEADINGS (Professional Experience, About Me, etc.) */
+/* Turn these dark in light mode for readability, keep accents blue */
+body.light-mode span.text-brand-sky.font-mono.uppercase {
+    color: #1C1E21 !important;
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+/* Update Background Brand Color to Premium Blue */
+body.light-mode .bg-brand-sky {
+    background-color: #1E9EFF !important;
+}
+
+body.light-mode h1 span.text-white {
+    color: #475569 !important;
+    /* Sub-heading */
+}
+
+/* Cards & Sections - Clean & Minimal */
+/* Cards & Sections - Pastel Gradient Redesign */
+body.light-mode .spotlight-card,
+body.light-mode #experience .group,
+body.light-mode #projects .group,
+body.light-mode #software-knowledge-grid .group {
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.02),
+        0 2px 4px -1px rgba(0, 0, 0, 0.02),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    /* Soft large radius */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle Noise Texture Overlay */
+body.light-mode .spotlight-card::before,
+body.light-mode #experience .group::before,
+body.light-mode #projects .group::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Card Varied Pastel Gradients */
+body.light-mode .spotlight-card:nth-of-type(1) {
+    background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+}
+
+/* Soft Blue */
+body.light-mode .spotlight-card:nth-of-type(2) {
+    background: linear-gradient(135deg, #F5F3FF 0%, #FFFFFF 100%);
+}
+
+/* Soft Purple */
+body.light-mode .spotlight-card:nth-of-type(3) {
+    background: linear-gradient(135deg, #FFF1F2 0%, #FFFFFF 100%);
+}
+
+/* Soft Pink */
+body.light-mode .spotlight-card:nth-of-type(4) {
+    background: linear-gradient(135deg, #F0FDFA 0%, #FFFFFF 100%);
+}
+
+/* Soft Teal */
+
+body.light-mode .spotlight-card:hover,
+body.light-mode #experience .group:hover,
+body.light-mode #projects .group:hover,
+body.light-mode #software-knowledge-grid .group:hover {
+    transform: translateY(-5px) scale(1.005);
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.05),
+        0 10px 10px -5px rgba(0, 0, 0, 0.01);
+    border-color: rgba(30, 158, 255, 0.2);
+    z-index: 10;
+}
+
+/* Stat Blocks / Inner Containers - Clean White */
+body.light-mode .spotlight-card .bg-\[\#0A0A0A\],
+body.light-mode .spotlight-card .bg-\[\#050505\],
+body.light-mode .spotlight-card .bg-\[\#0F110E\] {
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* Inner Text Adjustments */
+body.light-mode .spotlight-card p.text-white\/50 {
+    color: #64748B !important;
+    /* Proper Slate 500 */
+}
+
+/* Ensure headings inside cards are consistently dark */
+body.light-mode .spotlight-card h3 {
+    color: #1C1E21 !important;
+}
+
+/* Section Backgrounds */
+body.light-mode section {
+    background-color: transparent !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Buttons (Shiny CTA) */
+/* Buttons (Shiny CTA) - Light Mode Solid Contrast */
+body.light-mode .shiny-cta {
+    background: #1E9EFF;
+    color: #FFFFFF;
+    border: none;
+    box-shadow:
+        0 4px 6px -1px rgba(30, 158, 255, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    /* Inner subtle top light */
+}
+
+body.light-mode .shiny-cta:hover {
+    background: #0088CC;
+    /* Slightly darker on hover */
+    box-shadow:
+        0 10px 15px -3px rgba(30, 158, 255, 0.4),
+        0 4px 6px -2px rgba(30, 158, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Micro-code snippets / Terminal style boxes */
+body.light-mode .bg-\[\#0A0A0A\],
+body.light-mode .bg-\[\#0F110E\],
+body.light-mode .bg-\[\#050505\] {
+    background-color: #F8FAFC !important;
+    /* Very subtle off-white */
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Marquee / Fades */
+body.light-mode .mask-gradient-fade {
+    /* Invert mask for light mode if needed, or keep as is since it fades to transparent */
+}
+
+/* Contact Popup */
+body.light-mode .contact-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    /* Deep soft shadow */
+}
+
+body.light-mode .popup-overlay {
+    background: rgba(244, 246, 249, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+/* Text Glow Adjustment */
+body.light-mode .text-glow {
+    text-shadow: 0 0 15px rgba(30, 158, 255, 0.3);
+    /* Softer glow */
+}
+
+/* Fix CTA Buttons in Light Mode (PREMIUM) */
+body.light-mode #cta-email-btn,
+body.light-mode #cta-linkedin-btn,
+body.light-mode #cta-resume-btn {
+    background-color: #FFFFFF;
+    color: #1C1E21;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    font-weight: 500;
+}
+
+body.light-mode #cta-email-btn:hover,
+body.light-mode #cta-linkedin-btn:hover,
+body.light-mode #cta-resume-btn:hover {
+    background-color: #FFFFFF;
+    border-color: #1E9EFF;
+    color: #1E9EFF;
+    box-shadow: 0 5px 15px rgba(30, 158, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+body.light-mode #cta-email-label,
+body.light-mode #cta-linkedin-label,
+body.light-mode #cta-resume-label {
+    color: inherit;
 }
 
 @keyframes pulse-glow {
@@ -88,30 +441,88 @@ body {
 }
 
 .shiny-cta {
-    --gradient-angle: 0deg;
-    --gradient-angle-offset: 0deg;
-    --gradient-percent: 20%;
-    --gradient-shine: #38BDF8;
     position: relative;
     overflow: hidden;
     border-radius: 9999px;
-    padding: 1.25rem 2.5rem;
+    padding: 1.25rem 2.8rem;
     font-size: 1rem;
     line-height: 1.2;
     font-weight: 500;
     color: #ffffff;
-    background: linear-gradient(#030303, #030303) padding-box,
-        conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #0ea5e9 5%, var(--gradient-shine) 15%, #0ea5e9 30%, transparent 40%, transparent 100%) border-box;
-    border: 2px solid transparent;
-    box-shadow: inset 0 0 0 1px #1a1818;
-    outline: none;
-    transition: 800ms;
     cursor: pointer;
-    isolation: isolate;
-    outline-offset: 4px;
-    z-index: 0;
-    animation: border-spin 2.5s linear infinite;
     font-family: 'Inter', sans-serif;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+
+    /* GLASSMORPHISM STYLE (Dark Mode Default) */
+    background: rgba(30, 158, 255, 0.1);
+    /* Cyan tint 10% */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(30, 158, 255, 0.2);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 15px rgba(30, 158, 255, 0.1);
+    /* Subtle outer glow */
+    text-shadow: 0 0 10px rgba(30, 158, 255, 0.4);
+}
+
+.shiny-cta:hover {
+    transform: translateY(-3px);
+    background: rgba(30, 158, 255, 0.15);
+    /* Increase opacity on hover */
+    border-color: rgba(30, 158, 255, 0.5);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 25px rgba(30, 158, 255, 0.3);
+    /* Stronger glow on hover */
+    text-shadow: 0 0 15px rgba(30, 158, 255, 0.6);
+}
+
+/* Clean up old hover/before/after that might conflict */
+.shiny-cta::before,
+.shiny-cta::after {
+    display: none;
+}
+
+/* Hybrid Styling for Contact Button (Dark Mode Only Override) */
+/* Hybrid Styling for Contact Button (Dark Mode Only Override) */
+body:not(.light-mode) .contact-btn-override {
+    background: rgba(255, 255, 255, 0.05) !important;
+    /* 5% white */
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02) !important;
+    padding: 1.25rem 2.8rem !important;
+    border-radius: 9999px !important;
+    font-size: 1rem !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    /* Slightly muted text */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body:not(.light-mode) .contact-btn-override::before {
+    display: none !important;
+}
+
+body:not(.light-mode) .contact-btn-override:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 15px rgba(255, 255, 255, 0.05) !important;
+    /* Subtle white glow */
+    transform: translateY(-3px);
 }
 
 @keyframes border-spin {
@@ -265,23 +676,21 @@ body {
     }
 }
 
-@keyframes wave-morph {
-    0% {
-        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+@keyframes spin-slow-reverse {
+    from {
+        transform: rotate(360deg);
     }
 
-    33% {
-        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
-    }
-
-    66% {
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    }
-
-    100% {
-        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    to {
+        transform: rotate(0deg);
     }
 }
+
+.animate-spin-slow-reverse {
+    animation: spin-slow-reverse 15s linear infinite;
+}
+
+
 
 @keyframes blob {
 

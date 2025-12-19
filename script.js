@@ -382,3 +382,72 @@ document.querySelectorAll('.magnetic-btn').forEach(btn => {
         btn.style.transform = 'translate(0, 0)';
     });
 });
+
+// THEME TOGGLE
+const toggleBtn = document.getElementById("theme-toggle");
+const handle = document.getElementById("theme-handle");
+const sunIcon = document.getElementById("sun-icon");
+const moonIcon = document.getElementById("moon-icon");
+const body = document.body;
+
+// Load saved theme
+let theme = localStorage.getItem("theme") || "dark";
+applyTheme(theme);
+
+if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+        theme = (theme === "dark") ? "light" : "dark";
+        applyTheme(theme);
+        localStorage.setItem("theme", theme);
+    });
+}
+
+function applyTheme(mode) {
+    if (mode === "light") {
+        body.classList.add("light-mode");
+        // Move Handle to Right
+        if (handle) {
+            handle.style.transform = "translateX(24px)";
+            handle.classList.replace("bg-brand-sky", "bg-white"); // Optional: change handle color in light mode
+            handle.classList.add("text-brand-sky"); // Icon color
+        }
+        // Show Sun, Hide Moon
+        if (sunIcon) {
+            sunIcon.classList.remove("hidden");
+            sunIcon.classList.add("block");
+        }
+        if (moonIcon) {
+            moonIcon.classList.remove("block");
+            moonIcon.classList.add("hidden");
+        }
+        // Update Toggle Track Style
+        if (toggleBtn) {
+            toggleBtn.classList.replace("bg-white/10", "bg-black/5");
+            toggleBtn.classList.replace("border-white/20", "border-black/10");
+        }
+
+    } else {
+        body.classList.remove("light-mode");
+        // Move Handle to Left
+        if (handle) {
+            handle.style.transform = "translateX(0px)";
+            handle.classList.remove("bg-white", "text-brand-sky");
+            handle.classList.add("bg-brand-sky");
+        }
+        // Show Moon, Hide Sun
+        if (sunIcon) {
+            sunIcon.classList.remove("block");
+            sunIcon.classList.add("hidden");
+        }
+        if (moonIcon) {
+            moonIcon.classList.remove("hidden");
+            moonIcon.classList.add("block");
+        }
+        // Update Toggle Track Style
+        if (toggleBtn) {
+            toggleBtn.classList.replace("bg-black/5", "bg-white/10");
+            toggleBtn.classList.replace("border-black/10", "border-white/20");
+        }
+    }
+}
+
