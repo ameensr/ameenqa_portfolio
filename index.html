@@ -14,8 +14,19 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Iconify -->
-    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js" defer></script>
     <script>
+        // Immediate Theme Check to Prevent Flash
+        (function () {
+            const savedTheme = localStorage.getItem("theme") || "dark";
+            if (savedTheme === "light") {
+                document.documentElement.classList.add("light-mode");
+                document.body.classList.add("light-mode"); // Fallback if body exists, though usually too early
+            } else {
+                document.documentElement.classList.remove("light-mode");
+            }
+        })();
+
         tailwind.config = {
             theme: {
                 extend: {
@@ -586,7 +597,7 @@
                         <!-- Image Container (Glassmorphism) -->
                         <div
                             class="relative w-full h-full rounded-full overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl group-hover:shadow-[0_0_40px_rgba(30,158,255,0.15)] transition-all duration-500 z-10">
-                            <img src="profile.jpg" alt="Ameen - QA Engineer" id="profile-picture"
+                            <img src="profile.jpg" alt="Ameen - QA Engineer" id="profile-picture" loading="lazy"
                                 class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100">
 
                             <!-- Gloss Overlay -->
@@ -1211,8 +1222,8 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    <script src="config.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>

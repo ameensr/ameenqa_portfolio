@@ -385,69 +385,50 @@ document.querySelectorAll('.magnetic-btn').forEach(btn => {
 
 // THEME TOGGLE
 const toggleBtn = document.getElementById("theme-toggle");
-const handle = document.getElementById("theme-handle");
-const sunIcon = document.getElementById("sun-icon");
-const moonIcon = document.getElementById("moon-icon");
+// const handle = document.getElementById("theme-handle"); // Handled by CSS
+// const sunIcon = document.getElementById("sun-icon"); // Handled by CSS
+// const moonIcon = document.getElementById("moon-icon"); // Handled by CSS
 const body = document.body;
 
-// Load saved theme
-let theme = localStorage.getItem("theme") || "dark";
-applyTheme(theme);
+// Note: Initial theme application is now handled by inline script in index.html
+// and CSS rules in style.css based on body.light-mode class.
 
 if (toggleBtn) {
     toggleBtn.addEventListener("click", () => {
-        theme = (theme === "dark") ? "light" : "dark";
-        applyTheme(theme);
-        localStorage.setItem("theme", theme);
-    });
-}
+        body.classList.toggle("light-mode");
+        const isLight = body.classList.contains("light-mode");
 
-function applyTheme(mode) {
-    if (mode === "light") {
-        body.classList.add("light-mode");
-        // Move Handle to Right
-        if (handle) {
-            handle.style.transform = "translateX(24px)";
-            handle.classList.replace("bg-brand-sky", "bg-white"); // Optional: change handle color in light mode
-            handle.classList.add("text-brand-sky"); // Icon color
-        }
-        // Show Sun, Hide Moon
-        if (sunIcon) {
-            sunIcon.classList.remove("hidden");
-            sunIcon.classList.add("block");
-        }
-        if (moonIcon) {
-            moonIcon.classList.remove("block");
-            moonIcon.classList.add("hidden");
-        }
-        // Update Toggle Track Style
-        if (toggleBtn) {
+        // Update LocalStorage
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+
+        // Update Toggle Track Style (Optional JS helper if CSS is tricky for this specific part, but let's try to keep it simple)
+        // We can actually move this to CSS too: body.light-mode #theme-toggle { ... }
+        // For now, let's keep the track style logic here or minimal.
+        // Actually, style.css already has: body.light-mode nav button { ... } which covers generic button styles.
+        // Let's rely on CSS for the toggle track background as well?
+        // Checking index.html lines 128: bg-white/10. 
+        // Checking style.css line 425 in original script: replaced bg-white/10 with bg-black/5.
+        // Let's just toggle classes for the track if we want specific overrides, or use attribute selector in CSS.
+
+        // Let's keep the track generic or let the user decide. 
+        // The original script did specific class replacements for the track background.
+        if (isLight) {
             toggleBtn.classList.replace("bg-white/10", "bg-black/5");
             toggleBtn.classList.replace("border-white/20", "border-black/10");
-        }
-
-    } else {
-        body.classList.remove("light-mode");
-        // Move Handle to Left
-        if (handle) {
-            handle.style.transform = "translateX(0px)";
-            handle.classList.remove("bg-white", "text-brand-sky");
-            handle.classList.add("bg-brand-sky");
-        }
-        // Show Moon, Hide Sun
-        if (sunIcon) {
-            sunIcon.classList.remove("block");
-            sunIcon.classList.add("hidden");
-        }
-        if (moonIcon) {
-            moonIcon.classList.remove("hidden");
-            moonIcon.classList.add("block");
-        }
-        // Update Toggle Track Style
-        if (toggleBtn) {
+        } else {
             toggleBtn.classList.replace("bg-black/5", "bg-white/10");
             toggleBtn.classList.replace("border-black/10", "border-white/20");
         }
-    }
+    });
 }
+// Sync track style on load (since script is deferred)
+// We need to ensure the track background matches the current state
+if (body.classList.contains("light-mode") && toggleBtn) {
+    toggleBtn.classList.replace("bg-white/10", "bg-black/5");
+    toggleBtn.classList.replace("border-white/20", "border-black/10");
+}
+
+/* 
+function applyTheme(mode) - REMOVED (Logic moved to CSS and Inline Script)
+*/
 

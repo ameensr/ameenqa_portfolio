@@ -183,6 +183,32 @@ body.light-mode .bg-brand-sky {
     background-color: #1E9EFF !important;
 }
 
+/* --- THEME TOGGLE STATES --- */
+/* Handle Position & Color */
+body.light-mode #theme-handle {
+    transform: translateX(24px) !important;
+    background-color: #ffffff !important;
+    color: #1E9EFF !important;
+}
+
+/* Icon Visibility */
+body.light-mode #sun-icon {
+    display: block !important;
+}
+
+body.light-mode #moon-icon {
+    display: none !important;
+}
+
+/* Ensure dark mode defaults are respected when not in light mode */
+body:not(.light-mode) #sun-icon {
+    display: none;
+}
+
+body:not(.light-mode) #moon-icon {
+    display: block;
+}
+
 body.light-mode h1 span.text-white {
     color: #475569 !important;
     /* Sub-heading */
