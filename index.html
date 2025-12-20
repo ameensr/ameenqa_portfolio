@@ -64,7 +64,7 @@
     </style>
 </head>
 
-<body class="min-h-screen overflow-x-hidden selection:bg-brand-sky selection:text-black relative">
+<body class="min-h-screen overflow-x-hidden selection:bg-brand-sky selection:text-black relative preload">
 
     <!-- Particle Canvas -->
     <canvas id="bg-particles" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
@@ -654,79 +654,81 @@
                 <!-- Timeline Line (Mobile) -->
                 <div class="absolute left-0 top-0 bottom-0 w-px bg-white/10 md:hidden"></div>
 
-                <div
-                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 reveal-up">
-                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
-                        <div>
-                            <h3 class="text-2xl font-serif font-medium text-white mb-1">QA Engineer</h3>
-                            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/50">
-                                <span class="font-medium text-white/80">Ospyn Technologies Ltd</span>
-                                <span class="w-1 h-1 rounded-full bg-white/20"></span>
-                                <span>Trivandrum, Kerala</span>
-                            </div>
-                        </div>
-                        <div
-                            class="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/20 text-brand-sky text-xs font-mono font-medium w-fit">
-                            2022 – Present
-                        </div>
-                    </div>
-
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Designed and executed <strong>1500+ comprehensive test cases</strong> to ensure full
-                                software functionality.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Reduced <strong>defect leakage by 15%</strong> through rigorous manual and regression
-                                testing protocols.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Boosted test execution <strong>efficiency by 20%</strong> by automating high-volume
-                                tests with Selenium.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Managed the full lifecycle for <strong>2000+ defects using JIRA</strong> in fast-paced
-                                Agile/Scrum sprints.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Mentored <strong>3+ junior testers</strong>, elevating team proficiency in advanced
-                                test case development.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Pioneered the adoption of <strong>AI-driven prompt testing</strong> to validate ML
-                                model performance.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Verified data integrity by executing custom <strong>SQL queries</strong> against
-                                backend databases.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Partnered with developers and product teams to ensure <strong>quality
-                                    standards</strong> were met.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Contributed to all phases of the <strong>SDLC</strong>, from requirements analysis to
-                                release validation.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
-                            <span>Ensured a seamless user experience by performing detailed <strong>UI and usability
-                                    testing</strong>.</span>
-                        </li>
-                    </ul>
+                <div id="experience-container" class="flex flex-col gap-6">
+                    <!-- Dynamic Experience Data Will Be Loaded Here -->
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Education Section -->
+    <section id="education"
+        class="flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full px-6 pb-24 relative backdrop-blur-xl items-center border-t border-white/5 pt-24">
+        <div class="max-w-4xl w-full relative z-10">
+            <span
+                class="text-xs font-mono text-brand-sky uppercase tracking-[0.2em] font-medium mb-12 flex items-center justify-center gap-3">
+                <span class="w-1 h-1 bg-brand-sky rounded-full shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                Education
+            </span>
+
+            <div
+                class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 reveal-up flex flex-col md:flex-row items-center md:items-start gap-6">
+                <!-- Icon -->
+                <div
+                    class="w-14 h-14 rounded-2xl bg-brand-sky/10 border border-brand-sky/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.1)] group-hover:scale-105 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="text-brand-sky">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
+                </div>
+
+                <!-- Text Content -->
+                <div class="flex-1 text-center md:text-left">
+                    <h3
+                        class="text-xl md:text-2xl font-serif font-medium text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">
+                        Bachelor of Engineering</h3>
+                    <p class="text-white/60 font-medium text-base mb-1 [.light-mode_&]:text-black/60">Mechanical
+                        Engineering</p>
+                    <div
+                        class="flex items-center justify-center md:justify-start gap-2 mt-3 text-xs text-brand-sky/80 uppercase tracking-widest font-mono">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-sky"></span>
+                        Graduated 2022
+                    </div>
+                </div>
+
+                <!-- CGPA Badge -->
+                <div class="relative group/badge mt-6 md:mt-0 md:ml-auto">
+                    <div
+                        class="relative overflow-hidden rounded-xl bg-white/5 border border-white/10 p-1 transition-transform duration-300 hover:scale-105 hover:border-brand-sky/30">
+
+                        <!-- Animated Background Gradient (Hidden by default, reveals on hover) -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-brand-sky/20 to-purple-500/20 opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500">
+                        </div>
+
+                        <div
+                            class="relative flex flex-col items-center justify-center px-6 py-2 bg-[#0A0A0A]/90 rounded-lg backdrop-blur-md [.light-mode_&]:bg-white [.light-mode_&]:border-black/5 [.light-mode_&]:shadow-sm">
+                            <span
+                                class="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-1 [.light-mode_&]:text-black/60">CGPA</span>
+                            <span
+                                class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white group-hover/badge:from-brand-sky group-hover/badge:to-purple-400 transition-all duration-300 [.light-mode_&]:from-neutral-800 [.light-mode_&]:to-neutral-600">
+                                8.4
+                            </span>
+                        </div>
+
+                        <!-- Shine Element -->
+                        <div
+                            class="absolute inset-0 translate-x-[-100%] group-hover/badge:animate-shine bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Software Knowledge Section -->
     <section
@@ -771,13 +773,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Project 1 -->
                 <a href="#" id="project-link-0" target="_blank"
-                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 block">
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block">
                     <div
                         class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-sky/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                     <div class="flex flex-col gap-4">
                         <div
-                            class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 transition-colors">
+                            class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="text-brand-sky">
@@ -790,7 +792,7 @@
                         </div>
                         <div>
                             <h3 id="project-title-0"
-                                class="text-xl font-serif text-white mb-2 group-hover:text-brand-sky transition-colors">
+                                class="text-xl font-serif text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">
                                 Work Sample 1</h3>
                             <p id="project-desc-0" class="text-sm text-white/50">View detailed project documentation and
                                 reports</p>
@@ -810,13 +812,13 @@
 
                 <!-- Project 2 -->
                 <a href="#" id="project-link-1" target="_blank"
-                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 block">
+                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block">
                     <div
                         class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-sky/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                     <div class="flex flex-col gap-4">
                         <div
-                            class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 transition-colors">
+                            class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="text-brand-sky">
@@ -827,7 +829,7 @@
                         </div>
                         <div>
                             <h3 id="project-title-1"
-                                class="text-xl font-serif text-white mb-2 group-hover:text-brand-sky transition-colors">
+                                class="text-xl font-serif text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">
                                 Work Sample 2</h3>
                             <p id="project-desc-1" class="text-sm text-white/50">Check out the test strategy and
                                 execution logs</p>
@@ -861,9 +863,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Cert 1 -->
                 <div
-                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 flex items-center gap-4">
+                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-md transition-all duration-300 flex items-center gap-4">
                     <div
-                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 transition-colors">
+                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                             class="text-brand-sky">
@@ -879,16 +881,18 @@
                         </svg>
                     </div>
                     <div>
-                        <h4 class="text-white font-medium text-lg">AI-Powered Software Testing</h4>
+                        <h4 class="text-white font-serif font-medium text-lg [.light-mode_&]:text-black/80">AI-Powered
+                            Software
+                            Testing</h4>
                         <span class="text-xs text-brand-sky font-mono">Specialized Certification</span>
                     </div>
                 </div>
 
                 <!-- Cert 2 -->
                 <div
-                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 flex items-center gap-4">
+                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-md transition-all duration-300 flex items-center gap-4">
                     <div
-                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 transition-colors">
+                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                             class="text-brand-sky">
@@ -897,7 +901,9 @@
                         </svg>
                     </div>
                     <div>
-                        <h4 class="text-white font-medium text-lg">Introduction to JIRA</h4>
+                        <h4 class="text-white font-serif font-medium text-lg [.light-mode_&]:text-black/80">Introduction
+                            to JIRA
+                        </h4>
                         <span class="text-xs text-brand-sky font-mono">Project Management</span>
                     </div>
                 </div>

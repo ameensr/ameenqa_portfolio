@@ -1,16 +1,23 @@
 body {
     background-color: #030303;
     color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    /* Restore Font */
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* --- PREMIUM LIGHT MODE OVERRIDES --- */
 body.light-mode {
-    background: linear-gradient(180deg, #F4F7FA 0%, #FFFFFF 100%);
+    background-color: #ffffff;
+    background-image:
+        radial-gradient(at 0% 0%, rgba(240, 249, 255, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(255, 241, 242, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(245, 243, 255, 0.8) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(236, 254, 255, 0.6) 0px, transparent 50%);
     background-attachment: fixed;
+    background-size: 100% 100%;
     color: #4A4E57;
-    /* Soft Body Text */
 }
 
 /* HERO SECTION - Premium Agency Gradients */
@@ -107,11 +114,11 @@ body.light-mode .animate-sonar {
 
 /* Navbar - Glassmorphism */
 body.light-mode nav {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-color: rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
 }
 
 body.light-mode nav a,
@@ -143,6 +150,22 @@ body.light-mode #bg-particles {
     filter: invert(1) hue-rotate(190deg) opacity(0.5);
     /* Subtle Blue Tint */
 }
+
+@keyframes shine {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-shine {
+    animation: shine 1.5s forwards;
+    /* Slowed down slightly for elegance */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 
 /* Typography & Colors */
 body.light-mode .text-white {
@@ -219,6 +242,7 @@ body.light-mode h1 span.text-white {
 body.light-mode .spotlight-card,
 body.light-mode #experience .group,
 body.light-mode #projects .group,
+body.light-mode #education .group,
 body.light-mode #software-knowledge-grid .group {
     background: linear-gradient(145deg, #ffffff, #f8fafc);
     border: 1px solid rgba(255, 255, 255, 0.6);
@@ -246,7 +270,7 @@ body.light-mode #projects .group::before {
     z-index: 0;
 }
 
-/* Card Varied Pastel Gradients */
+/* Card Varied Pastel Gradients (Features) */
 body.light-mode .spotlight-card:nth-of-type(1) {
     background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
 }
@@ -266,28 +290,56 @@ body.light-mode .spotlight-card:nth-of-type(4) {
     background: linear-gradient(135deg, #F0FDFA 0%, #FFFFFF 100%);
 }
 
-/* Soft Teal */
+/* --- NEW: Experience Details Gradients --- */
+body.light-mode #experience .group:nth-child(odd) {
+    background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%) !important;
+    /* Soft Blue */
+}
 
+body.light-mode #experience .group:nth-child(even) {
+    background: linear-gradient(135deg, #F5F3FF 0%, #FFFFFF 100%) !important;
+    /* Soft Purple */
+}
+
+/* --- NEW: Projects Gradients --- */
+body.light-mode #projects .group:nth-of-type(1) {
+    background: linear-gradient(135deg, #FFF1F2 0%, #FFFFFF 100%) !important;
+    /* Soft Rose */
+}
+
+body.light-mode #projects .group:nth-of-type(2) {
+    background: linear-gradient(135deg, #ECFEFF 0%, #FFFFFF 100%) !important;
+    /* Soft Cyan */
+}
+
+/* --- Enhanced Card Hover --- */
 body.light-mode .spotlight-card:hover,
 body.light-mode #experience .group:hover,
 body.light-mode #projects .group:hover,
+body.light-mode #education .group:hover,
 body.light-mode #software-knowledge-grid .group:hover {
     transform: translateY(-5px) scale(1.005);
     box-shadow:
-        0 20px 25px -5px rgba(0, 0, 0, 0.05),
-        0 10px 10px -5px rgba(0, 0, 0, 0.01);
-    border-color: rgba(30, 158, 255, 0.2);
+        0 20px 40px -10px rgba(0, 0, 0, 0.08),
+        0 8px 10px -5px rgba(0, 0, 0, 0.02);
+    border-color: rgba(30, 158, 255, 0.3);
     z-index: 10;
 }
 
 /* Stat Blocks / Inner Containers - Clean White */
 body.light-mode .spotlight-card .bg-\[\#0A0A0A\],
-body.light-mode .spotlight-card .bg-\[\#050505\],
+body.light-mode .spotlight-card .bg-\[\#050505\] {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 body.light-mode .spotlight-card .bg-\[\#0F110E\] {
     background-color: #FFFFFF !important;
     border: 1px solid rgba(0, 0, 0, 0.04);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 }
+
+
 
 /* Inner Text Adjustments */
 body.light-mode .spotlight-card p.text-white\/50 {
@@ -307,23 +359,48 @@ body.light-mode section {
 }
 
 /* Buttons (Shiny CTA) */
-/* Buttons (Shiny CTA) - Light Mode Solid Contrast */
+/* Buttons (Shiny CTA) - Light Mode Premium Glass */
 body.light-mode .shiny-cta {
-    background: #1E9EFF;
-    color: #FFFFFF;
-    border: none;
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(30, 158, 255, 0.4) !important;
+    color: #1E9EFF !important;
+    /* Neon Blue Text */
     box-shadow:
-        0 4px 6px -1px rgba(30, 158, 255, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    /* Inner subtle top light */
+        0 4px 15px rgba(30, 158, 255, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5) !important;
+    font-weight: 600 !important;
 }
 
 body.light-mode .shiny-cta:hover {
-    background: #0088CC;
-    /* Slightly darker on hover */
+    background: rgba(255, 255, 255, 0.9) !important;
     box-shadow:
-        0 10px 15px -3px rgba(30, 158, 255, 0.4),
-        0 4px 6px -2px rgba(30, 158, 255, 0.2);
+        0 10px 25px rgba(30, 158, 255, 0.25),
+        0 0 15px rgba(30, 158, 255, 0.1) !important;
+    transform: translateY(-2px);
+    border-color: #1E9EFF !important;
+}
+
+/* Secondary Button - Light Mode Glass */
+body.light-mode .contact-btn-override {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: #4A4E57 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body.light-mode .contact-btn-override:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(30, 158, 255, 0.5) !important;
+    color: #1E9EFF !important;
+    box-shadow: 0 8px 20px rgba(30, 158, 255, 0.15) !important;
     transform: translateY(-2px);
 }
 
@@ -386,6 +463,10 @@ body.light-mode #cta-linkedin-label,
 body.light-mode #cta-resume-label {
     color: inherit;
 }
+
+
+
+
 
 @keyframes pulse-glow {
 
@@ -481,15 +562,17 @@ body.light-mode #cta-resume-label {
     z-index: 10;
 
     /* GLASSMORPHISM STYLE (Dark Mode Default) */
-    background: rgba(30, 158, 255, 0.1);
-    /* Cyan tint 10% */
+    /* GLASSMORPHISM STYLE (Dark Mode Default) */
+    background: rgba(30, 158, 255, 0.15);
+    /* Increased for visibility */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(30, 158, 255, 0.2);
+    border: 1px solid rgba(30, 158, 255, 0.4);
+    /* Stronger border */
     box-shadow:
         0 4px 20px rgba(0, 0, 0, 0.2),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        0 0 15px rgba(30, 158, 255, 0.1);
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 0 15px rgba(30, 158, 255, 0.15);
     /* Subtle outer glow */
     text-shadow: 0 0 10px rgba(30, 158, 255, 0.4);
 }
@@ -516,14 +599,15 @@ body.light-mode #cta-resume-label {
 /* Hybrid Styling for Contact Button (Dark Mode Only Override) */
 /* Hybrid Styling for Contact Button (Dark Mode Only Override) */
 body:not(.light-mode) .contact-btn-override {
-    background: rgba(255, 255, 255, 0.05) !important;
-    /* 5% white */
+    background: rgba(255, 255, 255, 0.08) !important;
+    /* Increased from 0.05 */
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    /* Visible border */
     box-shadow:
         0 4px 15px rgba(0, 0, 0, 0.2),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.02) !important;
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
     padding: 1.25rem 2.8rem !important;
     border-radius: 9999px !important;
     font-size: 1rem !important;
@@ -665,10 +749,23 @@ body:not(.light-mode) .contact-btn-override:hover {
     }
 }
 
+/* Preload Class to prevent transitions on load */
+.preload * {
+    transition: none !important;
+}
+
+/* Light Mode Toggle Button Overrides */
+body.light-mode #theme-toggle {
+    background-color: rgba(0, 0, 0, 0.05);
+    /* bg-black/5 */
+    border-color: rgba(0, 0, 0, 0.1);
+    /* border-black/10 */
+}
+
 /* Scroll Reveal */
 .reveal-up {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

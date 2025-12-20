@@ -99,7 +99,27 @@ const config = {
             category: "Creative & Visual Tools",
             skills: ["Adobe Photoshop", "Adobe Illustrator", "Adobe Premiere Pro", "Adobe After Effects", "Figma"]
         }
-    ]
+    ],
+    experience: [
+        {
+            role: "QA Engineer",
+            company: "Ospyn Technologies Ltd",
+            location: "Trivandrum, Kerala",
+            duration: "2022 – Present",
+            description: [
+                "Designed and executed <strong>1500+ comprehensive test cases</strong> to ensure full software functionality.",
+                "Reduced <strong>defect leakage by 15%</strong> through rigorous manual and regression testing protocols.",
+                "Boosted test execution <strong>efficiency by 20%</strong> by automating high-volume tests with Selenium.",
+                "Managed the full lifecycle for <strong>2000+ defects using JIRA</strong> in fast-paced Agile/Scrum sprints.",
+                "Mentored <strong>3+ junior testers</strong>, elevating team proficiency in advanced test case development.",
+                "Pioneered the adoption of <strong>AI-driven prompt testing</strong> to validate ML model performance.",
+                "Verified data integrity by executing custom <strong>SQL queries</strong> against backend databases.",
+                "Partnered with developers and product teams to ensure <strong>quality standards</strong> were met.",
+                "Contributed to all phases of the <strong>SDLC</strong>, from requirements analysis to release validation.",
+                "Ensured a seamless user experience by performing detailed <strong>UI and usability testing</strong>."
+            ]
+        }
+    ],
 };
 
 

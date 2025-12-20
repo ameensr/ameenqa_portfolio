@@ -137,7 +137,48 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Software Knowledge Subtitle
+        // Professional Experience
+        if (config.experience && config.experience.length > 0) {
+            const expContainer = document.getElementById('experience-container');
+            if (expContainer) {
+                expContainer.innerHTML = '';
+                const allCardsHtml = config.experience.map(job => {
+                    const bulletsHtml = job.description.map(item =>
+                        `<li class="flex items-start gap-3 text-white/70 font-light leading-relaxed [.light-mode_&]:text-black/60">
+                            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-sky/50 shrink-0"></span>
+                            <span>${item}</span>
+                        </li>`
+                    ).join('');
+
+                    return `
+                        <div class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 reveal-up">
+                            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
+                                <div>
+                                    <h3 class="text-2xl font-serif font-medium text-white mb-1 [.light-mode_&]:text-black/90">${job.role}</h3>
+                                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/50 [.light-mode_&]:text-black/60">
+                                        <span class="font-medium text-white/80 [.light-mode_&]:text-black/80">${job.company}</span>
+                                        ${job.location ? `<span class="w-1 h-1 rounded-full bg-white/20 [.light-mode_&]:bg-black/20"></span><span>${job.location}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/20 text-brand-sky text-xs font-mono font-medium w-fit">
+                                    ${job.duration}
+                                </div>
+                            </div>
+                            <ul class="space-y-4">
+                                ${bulletsHtml}
+                            </ul>
+                        </div>
+                    `;
+                }).join('');
+                expContainer.innerHTML = allCardsHtml;
+
+                // Re-observe new elements for scroll reveal
+                document.querySelectorAll('#experience-container .reveal-up').forEach(el => observer.observe(el));
+            }
+        }
+
+
+
         if (config.softwareSubtitle) {
             const subtitleEl = document.getElementById('software-subtitle');
             if (subtitleEl) subtitleEl.textContent = config.softwareSubtitle;
@@ -170,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Render Grid
             if (gridContainer) {
                 gridContainer.innerHTML = '';
-                config.softwareKnowledge.forEach(item => {
+                const allKnowledgeHtml = config.softwareKnowledge.map(item => {
                     const colorClass = colorMap[item.category] || "brand-sky";
                     const iconPath = iconMap[item.category] || `<circle cx="12" cy="12" r="10" />`;
 
@@ -178,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         `<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 hover:border-${colorClass === 'brand-sky' ? 'brand-sky/30' : colorClass + '/30'} transition-colors">${skill}</span>`
                     ).join('');
 
-                    const cardHtml = `
+                    return `
                         <div class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1">
                             <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-${colorClass}/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <h3 class="text-lg font-serif text-white mb-6 flex items-center gap-2">
@@ -192,8 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     `;
-                    gridContainer.innerHTML += cardHtml;
-                });
+                }).join('');
+                gridContainer.innerHTML = allKnowledgeHtml;
             }
 
             // Render Marquee
@@ -401,32 +442,13 @@ if (toggleBtn) {
         // Update LocalStorage
         localStorage.setItem("theme", isLight ? "light" : "dark");
 
-        // Update Toggle Track Style (Optional JS helper if CSS is tricky for this specific part, but let's try to keep it simple)
-        // We can actually move this to CSS too: body.light-mode #theme-toggle { ... }
-        // For now, let's keep the track style logic here or minimal.
-        // Actually, style.css already has: body.light-mode nav button { ... } which covers generic button styles.
-        // Let's rely on CSS for the toggle track background as well?
-        // Checking index.html lines 128: bg-white/10. 
-        // Checking style.css line 425 in original script: replaced bg-white/10 with bg-black/5.
-        // Let's just toggle classes for the track if we want specific overrides, or use attribute selector in CSS.
-
-        // Let's keep the track generic or let the user decide. 
-        // The original script did specific class replacements for the track background.
-        if (isLight) {
-            toggleBtn.classList.replace("bg-white/10", "bg-black/5");
-            toggleBtn.classList.replace("border-white/20", "border-black/10");
-        } else {
-            toggleBtn.classList.replace("bg-black/5", "bg-white/10");
-            toggleBtn.classList.replace("border-black/10", "border-white/20");
-        }
     });
 }
-// Sync track style on load (since script is deferred)
-// We need to ensure the track background matches the current state
-if (body.classList.contains("light-mode") && toggleBtn) {
-    toggleBtn.classList.replace("bg-white/10", "bg-black/5");
-    toggleBtn.classList.replace("border-white/20", "border-black/10");
-}
+
+// Remove Preload class on load to enable transitions
+window.addEventListener('load', () => {
+    document.body.classList.remove('preload');
+});
 
 /* 
 function applyTheme(mode) - REMOVED (Logic moved to CSS and Inline Script)
