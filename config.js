@@ -3,7 +3,7 @@ const common = {
     name: "Ameen S R",
     email: "ameenchirayil@gmail.com",
     mobile: "+91 8281331205",
-    resumeLink: "https://drive.google.com/file/d/1_UdfrYuiKovGcBepp_fZbCxy5-MRnQnS/view?usp=drive_link",
+    resumeLink: "https://drive.google.com/file/d/1OT_4rhlDb1yLbptXOlju5Oaq6JSHsICT/view?usp=drive_link",
     linkedin: "www.linkedin.com/in/ameensr/",
     github: "github.com/ameensr",
     twitter: "#"
