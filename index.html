@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | QA Engineer</title>
+    <title>Ameen S R | QA Engineer Portfolio</title>
+    <meta name="description" content="Portfolio of Ameen S R — Software QA Engineer with 3+ years of experience in manual and automation testing, API validation, and quality assurance.">
+    <meta name="author" content="Ameen S R">
+    <meta property="og:title" content="Ameen S R | QA Engineer Portfolio">
+    <meta property="og:description" content="Software QA Engineer specializing in manual testing, automation, and quality-driven development.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ameensr.github.io/ameenqa_portfolio/">
+    <meta property="og:image" content="https://ameensr.github.io/ameenqa_portfolio/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="profile.jpg" type="image/jpeg">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,13 +30,18 @@
             const savedTheme = localStorage.getItem("theme") || "dark";
             if (savedTheme === "light") {
                 document.documentElement.classList.add("light-mode");
-                document.body.classList.add("light-mode"); // Fallback if body exists, though usually too early
             } else {
                 document.documentElement.classList.remove("light-mode");
             }
         })();
 
         tailwind.config = {
+            safelist: [
+                'text-brand-sky', 'text-cyan-500', 'text-orange-500', 'text-purple-500', 'text-blue-500', 'text-pink-500',
+                'hover:border-brand-sky/30', 'hover:border-cyan-500/30', 'hover:border-orange-500/30',
+                'hover:border-purple-500/30', 'hover:border-blue-500/30', 'hover:border-pink-500/30',
+                'via-brand-sky/30', 'via-cyan-500/30', 'via-orange-500/30', 'via-purple-500/30', 'via-blue-500/30', 'via-pink-500/30'
+            ],
             theme: {
                 extend: {
                     fontFamily: {
@@ -61,7 +75,6 @@
         }
     </script>
     <link rel="stylesheet" href="style.css">
-    </style>
 </head>
 
 <body class="min-h-screen overflow-x-hidden selection:bg-brand-sky selection:text-black relative preload">
@@ -129,10 +142,12 @@
                 class="font-sans font-medium text-base tracking-tight text-white hover:text-brand-sky transition-colors">Ameen
                 S R</a>
         </div>
-        <div class="hidden md:flex items-center gap-6 mr-8">
+        <div class="hidden md:flex items-center gap-5 mr-8">
             <a href="#about" class="text-xs font-medium text-white/50 hover:text-white transition-colors">About</a>
-            <a href="#experience"
-                class="text-xs font-medium text-white/50 hover:text-white transition-colors">Experience</a>
+            <a href="#experience" class="text-xs font-medium text-white/50 hover:text-white transition-colors">Experience</a>
+            <a href="#skills" class="text-xs font-medium text-white/50 hover:text-white transition-colors">Skills</a>
+            <a href="#projects" class="text-xs font-medium text-white/50 hover:text-white transition-colors">Projects</a>
+            <a href="#contact-me-section" class="text-xs font-medium text-white/50 hover:text-white transition-colors">Contact</a>
         </div>
         <!-- Premium Theme Toggle -->
         <button id="theme-toggle"
@@ -597,8 +612,11 @@
                         <!-- Image Container (Glassmorphism) -->
                         <div
                             class="relative w-full h-full rounded-full overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl group-hover:shadow-[0_0_40px_rgba(30,158,255,0.15)] transition-all duration-500 z-10">
-                            <img src="profile.jpg" alt="Ameen - QA Engineer" id="profile-picture" loading="lazy"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                            <picture>
+                                <source id="profile-picture-webp" srcset="profile.webp" type="image/webp">
+                                <img src="profile.jpg" alt="Ameen S R - QA Engineer" id="profile-picture" loading="lazy" width="256" height="256"
+                                    class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                            </picture>
 
                             <!-- Gloss Overlay -->
                             <div
@@ -629,11 +647,7 @@
                     </h2>
 
                     <p id="about-description" class="text-lg md:text-xl text-white/70 font-light leading-relaxed">
-                        I'm <strong>Ameen</strong> — a detail-obsessed QA Engineer who finds bugs before your users do.
-                        With <strong>2.5+ years</strong> of hands-on experience in manual and automation testing.
-                        <br><br>
-                        Whether it’s functional testing, database validation, UI checks, or security assurance — I don’t
-                        just test. I challenge software to prove its worth.
+                        <!-- Populated from config.js -->
                     </p>
                 </div>
             </div>
@@ -671,59 +685,8 @@
                 Education
             </span>
 
-            <div
-                class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 reveal-up flex flex-col md:flex-row items-center md:items-start gap-6">
-                <!-- Icon -->
-                <div
-                    class="w-14 h-14 rounded-2xl bg-brand-sky/10 border border-brand-sky/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.1)] group-hover:scale-105 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-brand-sky">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                    </svg>
-                </div>
-
-                <!-- Text Content -->
-                <div class="flex-1 text-center md:text-left">
-                    <h3
-                        class="text-xl md:text-2xl font-serif font-medium text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">
-                        Bachelor of Engineering</h3>
-                    <p class="text-white/60 font-medium text-base mb-1 [.light-mode_&]:text-black/60">Mechanical
-                        Engineering</p>
-                    <div
-                        class="flex items-center justify-center md:justify-start gap-2 mt-3 text-xs text-brand-sky/80 uppercase tracking-widest font-mono">
-                        <span class="w-1.5 h-1.5 rounded-full bg-brand-sky"></span>
-                        Graduated 2022
-                    </div>
-                </div>
-
-                <!-- CGPA Badge -->
-                <div class="relative group/badge mt-6 md:mt-0 md:ml-auto">
-                    <div
-                        class="relative overflow-hidden rounded-xl bg-white/5 border border-white/10 p-1 transition-transform duration-300 hover:scale-105 hover:border-brand-sky/30">
-
-                        <!-- Animated Background Gradient (Hidden by default, reveals on hover) -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-brand-sky/20 to-purple-500/20 opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500">
-                        </div>
-
-                        <div
-                            class="relative flex flex-col items-center justify-center px-6 py-2 bg-[#0A0A0A]/90 rounded-lg backdrop-blur-md [.light-mode_&]:bg-white [.light-mode_&]:border-black/5 [.light-mode_&]:shadow-sm">
-                            <span
-                                class="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-1 [.light-mode_&]:text-black/60">CGPA</span>
-                            <span
-                                class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white group-hover/badge:from-brand-sky group-hover/badge:to-purple-400 transition-all duration-300 [.light-mode_&]:from-neutral-800 [.light-mode_&]:to-neutral-600">
-                                8.4
-                            </span>
-                        </div>
-
-                        <!-- Shine Element -->
-                        <div
-                            class="absolute inset-0 translate-x-[-100%] group-hover/badge:animate-shine bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none">
-                        </div>
-                    </div>
-                </div>
+            <div id="education-container">
+                <!-- Populated from config.js -->
             </div>
         </div>
     </section>
@@ -731,7 +694,7 @@
 
 
     <!-- Software Knowledge Section -->
-    <section
+    <section id="skills"
         class="flex flex-col lg:px-12 z-10 bg-[#030303]/80 w-full px-6 pb-32 relative backdrop-blur-xl items-center border-t border-white/5 pt-24">
         <div class="max-w-6xl w-full relative z-10 flex flex-col items-center">
             <span
@@ -770,82 +733,8 @@
                 Projects / Work Samples
             </span>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Project 1 -->
-                <a href="#" id="project-link-0" target="_blank"
-                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block">
-                    <div
-                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-sky/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-brand-sky">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 id="project-title-0"
-                                class="text-xl font-serif text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">
-                                Work Sample 1</h3>
-                            <p id="project-desc-0" class="text-sm text-white/50">View detailed project documentation and
-                                reports</p>
-                        </div>
-                        <div
-                            class="mt-4 flex items-center gap-2 text-xs font-medium text-brand-sky opacity-60 group-hover:opacity-100 transition-opacity">
-                            View Project
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="transition-transform group-hover:translate-x-1">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="#" id="project-link-1" target="_blank"
-                    class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block">
-                    <div
-                        class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-sky/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-brand-sky">
-                                <folder fill="currentColor" />
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 id="project-title-1"
-                                class="text-xl font-serif text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">
-                                Work Sample 2</h3>
-                            <p id="project-desc-1" class="text-sm text-white/50">Check out the test strategy and
-                                execution logs</p>
-                        </div>
-                        <div
-                            class="mt-4 flex items-center gap-2 text-xs font-medium text-brand-sky opacity-60 group-hover:opacity-100 transition-opacity">
-                            View Project
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="transition-transform group-hover:translate-x-1">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </a>
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Populated from config.js -->
             </div>
         </div>
     </section>
@@ -860,53 +749,8 @@
                 Certifications
             </span>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Cert 1 -->
-                <div
-                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-md transition-all duration-300 flex items-center gap-4">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                            class="text-brand-sky">
-                            <path d="M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
-                            <path d="M2 12h1" />
-                            <path d="M21 12h1" />
-                            <path d="M12 2v1" />
-                            <path d="M12 21v1" />
-                            <path d="m4.93 4.93.7.7" />
-                            <path d="m18.36 18.36.7.7" />
-                            <path d="m4.93 19.07.7-.7" />
-                            <path d="m18.36 5.64.7-.7" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-serif font-medium text-lg [.light-mode_&]:text-black/80">AI-Powered
-                            Software
-                            Testing</h4>
-                        <span class="text-xs text-brand-sky font-mono">Specialized Certification</span>
-                    </div>
-                </div>
-
-                <!-- Cert 2 -->
-                <div
-                    class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-md transition-all duration-300 flex items-center gap-4">
-                    <div
-                        class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                            class="text-brand-sky">
-                            <rect width="18" height="18" x="3" y="3" rx="2" />
-                            <path d="m9 12 2 2 4-4" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-serif font-medium text-lg [.light-mode_&]:text-black/80">Introduction
-                            to JIRA
-                        </h4>
-                        <span class="text-xs text-brand-sky font-mono">Project Management</span>
-                    </div>
-                </div>
+            <div id="certifications-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Populated from config.js -->
             </div>
         </div>
     </section>
@@ -1174,7 +1018,7 @@
     <footer
         class="lg:px-12 flex flex-col z-10 overflow-hidden bg-[#030303] w-full border-white/5 border-t pt-12 pr-6 pb-12 pl-6 relative items-center">
         <div class="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-            <span class="text-white/30 text-xs font-mono tracking-wide">© 2025 - This Website build on coffee,
+            <span class="text-white/30 text-xs font-mono tracking-wide">© 2026 — This website was built on coffee,
                 creativity, and Vibe Coding.</span>
             <div class="flex gap-4">
                 <a href="#" id="footer-github" target="_blank" class="text-white/40 hover:text-white text-xs">Github</a>

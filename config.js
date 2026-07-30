@@ -6,7 +6,7 @@ const common = {
     resumeLink: "https://drive.google.com/file/d/1OT_4rhlDb1yLbptXOlju5Oaq6JSHsICT/view?usp=drive_link",
     linkedin: "www.linkedin.com/in/ameensr/",
     github: "github.com/ameensr",
-    twitter: "#"
+    twitter: "" // Leave empty to hide Twitter link in footer
 };
 
 const config = {
@@ -15,6 +15,7 @@ const config = {
     gmail: common.email,
     mobile: common.mobile,
     profilePicture: "profile.jpg",
+    profilePictureWebp: "profile.webp",
 
     hero: {
         description: "Software QA Engineer | Manual & Automation Tester<br>3+ years ensuring bug-free, scalable applications through quality-driven testing"
@@ -24,20 +25,20 @@ const config = {
         description: `I'm <strong>${common.name}</strong> — a detail-obsessed QA Engineer who finds bugs before your clients do. 
         With <strong>3+ years</strong> of hands-on experience in manual and automation testing.
         <br><br>
-        Whether it’s functional testing, database validation, UI checks, or security assurance — I don’t 
+        Whether it's functional testing, database validation, UI checks, or security assurance — I don't 
         just test. I challenge software to prove its worth.`
     },
     socialLinks: {
         github: `https://${common.github}`,
         linkedin: `https://${common.linkedin}`,
-        twitter: common.twitter
+        twitter: common.twitter ? (common.twitter.startsWith("http") ? common.twitter : `https://${common.twitter}`) : ""
     },
     cta: {
         title: "Ready to start your <span class=\"opacity-60 italic\">next project?</span>",
-        subtitle: "I might be the teammate you’re looking for.",
+        subtitle: "I might be the teammate you're looking for.",
         description: "From breaking bugs to building ideas, I bring 3+ years of QA expertise, documentation skills, and an eye for details that matter.<br><br>Curious about what I can do? My resume says the rest.",
         activeMicroInteraction: "bugPortal", // Options: "systemOrb" or "bugPortal"
-        showNoticePeriod: true, // Set to false to hide the box completely
+        showNoticePeriod: true,
         noticePeriod: "Building reliable software through structured testing and quality-driven practices",
         buttonLabels: {
             email: "Email",
@@ -50,7 +51,7 @@ const config = {
             resume: common.resumeLink
         },
         noticeBubble: {
-            isVisible: true, // Set to false to hide the noticeBubble
+            isVisible: true,
             text: "Interested in global software quality standards and international best practices"
         }
     },
@@ -64,6 +65,22 @@ const config = {
             title: "Sample Bug Report",
             description: "Check out the test strategy and execution logs",
             link: "https://drive.google.com/file/d/1foJB2ZHNhzoKRJpvRhjPkXsafPYys_Il/view?usp=drive_link"
+        }
+    ],
+    education: {
+        degree: "Bachelor of Engineering",
+        field: "Mechanical Engineering",
+        graduated: "Graduated 2022",
+        cgpa: "8.4"
+    },
+    certifications: [
+        {
+            title: "AI-Powered Software Testing",
+            subtitle: "Specialized Certification"
+        },
+        {
+            title: "Introduction to JIRA",
+            subtitle: "Project Management"
         }
     ],
     contactSection: {
@@ -121,5 +138,4 @@ const config = {
         }
     ],
 };
-
 
