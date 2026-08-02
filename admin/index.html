@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Customisation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <p class="brand">Customise</p>
+        <p class="brand-sub">Edit portfolio content, then download <code>config.js</code> and replace it in the repo.</p>
+        <button type="button" class="nav-btn active" data-panel="profile">Profile &amp; Contact</button>
+        <button type="button" class="nav-btn" data-panel="site">Site &amp; SEO</button>
+        <button type="button" class="nav-btn" data-panel="hero">Hero</button>
+        <button type="button" class="nav-btn" data-panel="about">About</button>
+        <button type="button" class="nav-btn" data-panel="experience">Experience</button>
+        <button type="button" class="nav-btn" data-panel="education">Education</button>
+        <button type="button" class="nav-btn" data-panel="certs">Certifications</button>
+        <button type="button" class="nav-btn" data-panel="projects">Projects</button>
+        <button type="button" class="nav-btn" data-panel="skills">Skills</button>
+        <button type="button" class="nav-btn" data-panel="cta">CTA &amp; Footer</button>
+        <div class="sidebar-actions">
+            <button type="button" class="btn btn-primary" id="btn-download">Download config.js</button>
+            <button type="button" class="btn" id="btn-save-draft">Save draft</button>
+            <button type="button" class="btn" id="btn-load-draft">Load draft</button>
+            <button type="button" class="btn btn-ghost" id="btn-import">Import JSON</button>
+            <button type="button" class="btn btn-ghost" id="btn-reset">Reset to live</button>
+            <a class="btn btn-ghost" href="../index.html" style="text-align:center;">← View portfolio</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="topbar">
+            <div>
+                <h1 id="panel-title">Profile &amp; Contact</h1>
+                <p id="panel-desc">Name, photo paths, resume link, and socials.</p>
+            </div>
+            <div class="actions">
+                <button type="button" class="btn btn-primary" id="btn-download-top">Download config.js</button>
+            </div>
+        </div>
+
+        <!-- PROFILE -->
+        <section class="panel active" id="panel-profile">
+            <div class="card">
+                <h2>Identity</h2>
+                <p class="hint">These sync into contact, CTA, and social links when you download.</p>
+                <div class="grid-2">
+                    <label class="field">Name<input type="text" data-path="common.name"></label>
+                    <label class="field">Email<input type="email" data-path="common.email"></label>
+                    <label class="field">Mobile<input type="text" data-path="common.mobile"></label>
+                    <label class="field">Resume PDF / Drive link<input type="url" data-path="common.resumeLink"></label>
+                    <label class="field">LinkedIn (no https://)<input type="text" data-path="common.linkedin" placeholder="www.linkedin.com/in/..."></label>
+                    <label class="field">GitHub (no https://)<input type="text" data-path="common.github" placeholder="github.com/..."></label>
+                    <label class="field">Twitter / X URL (optional)<input type="text" data-path="common.twitter" placeholder="Leave empty to hide"></label>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Profile photo</h2>
+                <p class="hint">Set filenames that exist in the repo root (e.g. profile.jpg). To change the image: replace those files locally, then push. Preview below uses the paths you enter.</p>
+                <div class="photo-row">
+                    <img id="photo-preview" class="photo-preview" src="../profile.jpg" alt="Profile preview">
+                    <div style="flex:1; min-width:220px;">
+                        <label class="field">JPEG path<input type="text" data-path="config.profilePicture" id="photo-jpg"></label>
+                        <label class="field">WebP path<input type="text" data-path="config.profilePictureWebp" id="photo-webp"></label>
+                        <input type="file" id="photo-file" class="hidden-file" accept="image/*">
+                        <button type="button" class="btn" id="btn-pick-photo">Preview local image…</button>
+                        <p class="hint" style="margin-top:10px;">Local preview does not upload to GitHub. After picking, still replace <code>profile.jpg</code> / <code>profile.webp</code> in the project folder.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SITE -->
+        <section class="panel" id="panel-site">
+            <div class="card">
+                <h2>SEO &amp; branding</h2>
+                <p class="hint">Browser title, meta tags, and Open Graph.</p>
+                <label class="field">Display name (nav)<input type="text" data-path="config.site.name"></label>
+                <label class="field">Page title<input type="text" data-path="config.site.title"></label>
+                <label class="field">Meta description<textarea data-path="config.site.description"></textarea></label>
+                <div class="grid-2">
+                    <label class="field">Author<input type="text" data-path="config.site.author"></label>
+                    <label class="field">OG title<input type="text" data-path="config.site.ogTitle"></label>
+                </div>
+                <label class="field">OG description<textarea data-path="config.site.ogDescription"></textarea></label>
+                <div class="grid-2">
+                    <label class="field">Site URL<input type="url" data-path="config.site.ogUrl"></label>
+                    <label class="field">OG image URL<input type="url" data-path="config.site.ogImage"></label>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERO -->
+        <section class="panel" id="panel-hero">
+            <div class="card">
+                <h2>Hero content</h2>
+                <p class="hint">HTML allowed in title and description (e.g. &lt;br&gt;, &lt;span&gt;).</p>
+                <label class="field">Eyebrow<input type="text" data-path="config.hero.eyebrow"></label>
+                <label class="field">Title HTML<textarea class="tall" data-path="config.hero.titleHtml"></textarea></label>
+                <label class="field">Description HTML<textarea data-path="config.hero.description"></textarea></label>
+                <div class="grid-2">
+                    <label class="field">Primary CTA label<input type="text" data-path="config.hero.primaryCta.label"></label>
+                    <label class="field">Primary CTA link<input type="text" data-path="config.hero.primaryCta.href"></label>
+                    <label class="field">Secondary CTA label<input type="text" data-path="config.hero.secondaryCta.label"></label>
+                    <label class="field">Left label<input type="text" data-path="config.hero.labelLeft"></label>
+                    <label class="field">Right label<input type="text" data-path="config.hero.labelRight"></label>
+                </div>
+                <label class="field">Tools marquee (comma-separated)<input type="text" id="hero-tools" placeholder="CYPRESS, SELENIUM, ..."></label>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="panel" id="panel-about">
+            <div class="card">
+                <h2>About me</h2>
+                <label class="field">Title HTML<textarea data-path="config.aboutMe.title"></textarea></label>
+                <label class="field">Description HTML<textarea class="tall" data-path="config.aboutMe.description"></textarea></label>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section class="panel" id="panel-experience">
+            <div class="card">
+                <h2>Experience</h2>
+                <p class="hint">One job per card. Put each bullet on its own line. HTML like &lt;strong&gt; is allowed.</p>
+                <div id="experience-list"></div>
+                <button type="button" class="btn btn-primary" id="btn-add-experience">+ Add experience</button>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section class="panel" id="panel-education">
+            <div class="card">
+                <h2>Education</h2>
+                <p class="hint">Add multiple degrees if needed. Leave CGPA empty to hide the badge.</p>
+                <div id="education-list"></div>
+                <button type="button" class="btn btn-primary" id="btn-add-education">+ Add education</button>
+            </div>
+        </section>
+
+        <!-- CERTS -->
+        <section class="panel" id="panel-certs">
+            <div class="card">
+                <h2>Certifications</h2>
+                <p class="hint">Optional link opens the certificate (Drive, Credly, etc.).</p>
+                <div id="certs-list"></div>
+                <button type="button" class="btn btn-primary" id="btn-add-cert">+ Add certification</button>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="panel" id="panel-projects">
+            <div class="card">
+                <h2>Projects</h2>
+                <div id="projects-list"></div>
+                <button type="button" class="btn btn-primary" id="btn-add-project">+ Add project</button>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="panel" id="panel-skills">
+            <div class="card">
+                <h2>Skills</h2>
+                <label class="field">Subtitle<input type="text" data-path="config.softwareSubtitle"></label>
+                <p class="hint">Skills: comma-separated. Color: sky, cyan, orange, purple, blue, pink.</p>
+                <div id="skills-list"></div>
+                <button type="button" class="btn btn-primary" id="btn-add-skill">+ Add skill category</button>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="panel" id="panel-cta">
+            <div class="card">
+                <h2>Call to action</h2>
+                <label class="field">Title HTML<textarea data-path="config.cta.title"></textarea></label>
+                <label class="field">Subtitle<input type="text" data-path="config.cta.subtitle"></label>
+                <label class="field">Description HTML<textarea data-path="config.cta.description"></textarea></label>
+                <div class="grid-2">
+                    <label class="field">Micro-interaction
+                        <select data-path="config.cta.activeMicroInteraction">
+                            <option value="bugPortal">Bug portal</option>
+                            <option value="systemOrb">System orb</option>
+                        </select>
+                    </label>
+                    <label class="field">Notice text<input type="text" data-path="config.cta.noticePeriod"></label>
+                </div>
+                <label class="check-row"><input type="checkbox" data-path="config.cta.showNoticePeriod"> Show notice period / status line</label>
+                <label class="check-row"><input type="checkbox" data-path="config.cta.noticeBubble.isVisible"> Show notice bubble</label>
+                <label class="field">Bubble text<input type="text" data-path="config.cta.noticeBubble.text"></label>
+                <div class="grid-2">
+                    <label class="field">Email button label<input type="text" data-path="config.cta.buttonLabels.email"></label>
+                    <label class="field">LinkedIn button label<input type="text" data-path="config.cta.buttonLabels.linkedin"></label>
+                    <label class="field">Resume button label<input type="text" data-path="config.cta.buttonLabels.resume"></label>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Contact section &amp; footer</h2>
+                <label class="check-row"><input type="checkbox" data-path="config.contactSection.isVisible"> Show contact section</label>
+                <label class="field">Footer text<input type="text" data-path="config.site.footerText"></label>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast"></div>
+    <input type="file" id="import-file" class="hidden-file" accept=".json,.js,application/json,text/javascript">
+
+    <script src="../config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

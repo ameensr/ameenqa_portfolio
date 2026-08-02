@@ -138,7 +138,7 @@
                     </path>
                 </svg>
             </div>
-            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+            <a href="#" id="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
                 class="font-sans font-medium text-base tracking-tight text-white hover:text-brand-sky transition-colors">Ameen
                 S R</a>
         </div>
@@ -192,9 +192,9 @@
                 <span class="relative flex h-2 w-2"><span
                         class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-sky opacity-75"></span><span
                         class="relative inline-flex rounded-full h-2 w-2 bg-brand-sky"></span></span>
-                Where Reliability Begins — Let’s Work Together
+                <span id="hero-eyebrow">Where Reliability Begins — Let’s Work Together</span>
             </h4>
-            <h1
+            <h1 id="hero-title"
                 class="lg:text-7xl leading-[1.1] text-brand-sky animate-text-glow text-5xl italic tracking-tight font-serif mb-6">
                 Engineering perfection.<br>
                 <span class="text-white opacity-90">Securing reliability.</span>
@@ -206,12 +206,12 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-6 gap-x-6 gap-y-6 items-start sm:items-center reveal-up"
                 style="transition-delay: 0.2s;">
-                <a href="#experience" class="shiny-cta focus:outline-none text-center magnetic-btn"><span>View
+                <a href="#experience" id="hero-primary-cta" class="shiny-cta focus:outline-none text-center magnetic-btn"><span>View
                         Experience</span></a>
                 <button onclick="openContactPopup()"
                     class="contact-btn-override hover:bg-white/10 hover:text-white transition-all flex text-sm font-medium text-slate-300 bg-white/5 rounded-full pt-3 pr-6 pb-3 pl-6 gap-x-2 gap-y-2 items-center group cursor-pointer magnetic-btn"
                     style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05); position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.15)); --border-radius-before: 9999px">
-                    <span class="text-sm font-medium tracking-tight">Contact Me</span>
+                    <span id="hero-secondary-cta-label" class="text-sm font-medium tracking-tight">Contact Me</span>
                 </button>
             </div>
         </div>
@@ -260,11 +260,11 @@
                 </g>
             </svg>
             <div class="absolute top-[20%] lg:top-[25%] left-[10%] lg:left-[15%] flex flex-col items-end">
-                <span class="text-xs font-mono text-brand-sky tracking-widest mb-1 opacity-80">100% COVERAGE</span>
+                <span id="hero-label-left" class="text-xs font-mono text-brand-sky tracking-widest mb-1 opacity-80">100% COVERAGE</span>
                 <div class="h-[1px] w-12 bg-gradient-to-l from-brand-sky to-transparent"></div>
             </div>
             <div class="absolute bottom-[20%] lg:bottom-[25%] right-[10%] lg:right-[15%] flex flex-col items-start">
-                <span class="text-xs font-mono text-brand-sky tracking-widest mb-1 opacity-80">ZERO BUGS</span>
+                <span id="hero-label-right" class="text-xs font-mono text-brand-sky tracking-widest mb-1 opacity-80">ZERO BUGS</span>
                 <div class="h-[1px] w-12 bg-gradient-to-l from-brand-sky to-transparent"></div>
             </div>
         </div>
@@ -274,7 +274,7 @@
                 class="flex flex-col lg:flex-row overflow-hidden opacity-50 w-full pt-6 gap-x-6 gap-y-6 items-center justify-between">
 
                 <div class="flex-1 overflow-hidden mask-gradient-fade w-full relative">
-                    <div
+                    <div id="hero-tools-marquee"
                         class="flex animate-marquee hover:[animation-play-state:paused] w-max gap-x-32 gap-y-16 items-center">
                         <span class="text-white/50 font-mono text-lg">CYPRESS</span>
                         <span class="text-white/50 font-mono text-lg">SELENIUM</span>
@@ -282,7 +282,6 @@
                         <span class="text-white/50 font-mono text-lg">JEST</span>
                         <span class="text-white/50 font-mono text-lg">JIRA</span>
                         <span class="text-white/50 font-mono text-lg">APPIUM</span>
-                        <!-- Duplicate -->
                         <span class="text-white/50 font-mono text-lg">CYPRESS</span>
                         <span class="text-white/50 font-mono text-lg">SELENIUM</span>
                         <span class="text-white/50 font-mono text-lg">PLAYWRIGHT</span>
@@ -685,7 +684,7 @@
                 Education
             </span>
 
-            <div id="education-container">
+            <div id="education-container" class="flex flex-col gap-6">
                 <!-- Populated from config.js -->
             </div>
         </div>
@@ -1018,7 +1017,7 @@
     <footer
         class="lg:px-12 flex flex-col z-10 overflow-hidden bg-[#030303] w-full border-white/5 border-t pt-12 pr-6 pb-12 pl-6 relative items-center">
         <div class="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-            <span class="text-white/30 text-xs font-mono tracking-wide">© 2026 — This website was built on coffee,
+            <span id="footer-text" class="text-white/30 text-xs font-mono tracking-wide">© 2026 — This website was built on coffee,
                 creativity, and Vibe Coding.</span>
             <div class="flex gap-4">
                 <a href="#" id="footer-github" target="_blank" class="text-white/40 hover:text-white text-xs">Github</a>

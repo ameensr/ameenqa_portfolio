@@ -9,53 +9,25 @@ function syncThemeFromStorage() {
     setTheme(isLight);
 }
 
-const SKILL_STYLES = {
-    "Quality Assurance & Testing": {
-        icon: "text-brand-sky",
-        hoverBorder: "hover:border-brand-sky/30",
-        viaGradient: "via-brand-sky/30"
-    },
-    "Automation, Development & AI-Assisted Building": {
-        icon: "text-cyan-500",
-        hoverBorder: "hover:border-cyan-500/30",
-        viaGradient: "via-cyan-500/30"
-    },
-    "Database & Backend Validation": {
-        icon: "text-orange-500",
-        hoverBorder: "hover:border-orange-500/30",
-        viaGradient: "via-orange-500/30"
-    },
-    "Engineering & Design Tools": {
-        icon: "text-purple-500",
-        hoverBorder: "hover:border-purple-500/30",
-        viaGradient: "via-purple-500/30"
-    },
-    "Productivity & Collaboration": {
-        icon: "text-blue-500",
-        hoverBorder: "hover:border-blue-500/30",
-        viaGradient: "via-blue-500/30"
-    },
-    "Creative & Visual Tools": {
-        icon: "text-pink-500",
-        hoverBorder: "hover:border-pink-500/30",
-        viaGradient: "via-pink-500/30"
-    }
+const SKILL_COLOR_STYLES = {
+    sky: { icon: "text-brand-sky", hoverBorder: "hover:border-brand-sky/30", viaGradient: "via-brand-sky/30" },
+    cyan: { icon: "text-cyan-500", hoverBorder: "hover:border-cyan-500/30", viaGradient: "via-cyan-500/30" },
+    orange: { icon: "text-orange-500", hoverBorder: "hover:border-orange-500/30", viaGradient: "via-orange-500/30" },
+    purple: { icon: "text-purple-500", hoverBorder: "hover:border-purple-500/30", viaGradient: "via-purple-500/30" },
+    blue: { icon: "text-blue-500", hoverBorder: "hover:border-blue-500/30", viaGradient: "via-blue-500/30" },
+    pink: { icon: "text-pink-500", hoverBorder: "hover:border-pink-500/30", viaGradient: "via-pink-500/30" }
 };
 
-const SKILL_ICONS = {
-    "Quality Assurance & Testing": `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" />`,
-    "Automation, Development & AI-Assisted Building": `<circle cx="12" cy="12" r="10" /><line x1="2" x2="22" y1="12" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />`,
-    "Database & Backend Validation": `<ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />`,
-    "Engineering & Design Tools": `<circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24" /><path d="m14.83 9.17 4.24-4.24" /><path d="m14.83 14.83 4.24 4.24" /><path d="m9.17 14.83-4.24 4.24" /><circle cx="12" cy="12" r="4" />`,
-    "Productivity & Collaboration": `<rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />`,
-    "Creative & Visual Tools": `<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M9 15c.6 0 1.2-.2 1.6-.6.4-.5.7-1.1.7-1.9 0-1-.5-1.9-1.4-2.2" /><circle cx="10" cy="13" r=".1" /><path d="M15 15v-4" />`
+const SKILL_ICONS_BY_COLOR = {
+    sky: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" />`,
+    cyan: `<circle cx="12" cy="12" r="10" /><line x1="2" x2="22" y1="12" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />`,
+    orange: `<ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />`,
+    purple: `<circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24" /><path d="m14.83 9.17 4.24-4.24" /><path d="m14.83 14.83 4.24 4.24" /><path d="m9.17 14.83-4.24 4.24" /><circle cx="12" cy="12" r="4" />`,
+    blue: `<rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />`,
+    pink: `<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M9 15c.6 0 1.2-.2 1.6-.6.4-.5.7-1.1.7-1.9 0-1-.5-1.9-1.4-2.2" /><circle cx="10" cy="13" r=".1" /><path d="M15 15v-4" />`
 };
 
-const DEFAULT_SKILL_STYLE = {
-    icon: "text-brand-sky",
-    hoverBorder: "hover:border-brand-sky/30",
-    viaGradient: "via-brand-sky/30"
-};
+const DEFAULT_SKILL_STYLE = SKILL_COLOR_STYLES.sky;
 
 function observeRevealElements(selector) {
     document.querySelectorAll(selector).forEach(el => observer.observe(el));
@@ -99,9 +71,10 @@ function renderProjects(projects) {
 
 function renderEducation(education) {
     const container = document.getElementById('education-container');
-    if (!container || !education) return;
+    const items = Array.isArray(education) ? education : (education ? [education] : []);
+    if (!container || !items.length) return;
 
-    container.innerHTML = `
+    container.innerHTML = items.map(edu => `
         <div class="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-lg transition-all duration-300 reveal-up flex flex-col md:flex-row items-center md:items-start gap-6">
             <div class="w-14 h-14 rounded-2xl bg-brand-sky/10 border border-brand-sky/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.1)] group-hover:scale-105 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-sky">
@@ -110,25 +83,26 @@ function renderEducation(education) {
                 </svg>
             </div>
             <div class="flex-1 text-center md:text-left">
-                <h3 class="text-xl md:text-2xl font-serif font-medium text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">${education.degree}</h3>
-                <p class="text-white/60 font-medium text-base mb-1 [.light-mode_&]:text-black/60">${education.field}</p>
+                <h3 class="text-xl md:text-2xl font-serif font-medium text-white mb-2 group-hover:text-brand-sky transition-colors [.light-mode_&]:text-black/90">${edu.degree}</h3>
+                <p class="text-white/60 font-medium text-base mb-1 [.light-mode_&]:text-black/60">${edu.field}</p>
                 <div class="flex items-center justify-center md:justify-start gap-2 mt-3 text-xs text-brand-sky/80 uppercase tracking-widest font-mono">
                     <span class="w-1.5 h-1.5 rounded-full bg-brand-sky"></span>
-                    ${education.graduated}
+                    ${edu.graduated}
                 </div>
             </div>
+            ${edu.cgpa ? `
             <div class="relative group/badge mt-6 md:mt-0 md:ml-auto">
                 <div class="relative overflow-hidden rounded-xl bg-white/5 border border-white/10 p-1 transition-transform duration-300 hover:scale-105 hover:border-brand-sky/30">
                     <div class="absolute inset-0 bg-gradient-to-r from-brand-sky/20 to-purple-500/20 opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative flex flex-col items-center justify-center px-6 py-2 bg-[#0A0A0A]/90 rounded-lg backdrop-blur-md [.light-mode_&]:bg-white [.light-mode_&]:border-black/5 [.light-mode_&]:shadow-sm">
                         <span class="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-1 [.light-mode_&]:text-black/60">CGPA</span>
-                        <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white group-hover/badge:from-brand-sky group-hover/badge:to-purple-400 transition-all duration-300 [.light-mode_&]:from-neutral-800 [.light-mode_&]:to-neutral-600">${education.cgpa}</span>
+                        <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white group-hover/badge:from-brand-sky group-hover/badge:to-purple-400 transition-all duration-300 [.light-mode_&]:from-neutral-800 [.light-mode_&]:to-neutral-600">${edu.cgpa}</span>
                     </div>
                     <div class="absolute inset-0 translate-x-[-100%] group-hover/badge:animate-shine bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
                 </div>
-            </div>
+            </div>` : ''}
         </div>
-    `;
+    `).join('');
 
     observeRevealElements('#education-container .reveal-up');
 }
@@ -137,9 +111,9 @@ function renderCertifications(certifications) {
     const container = document.getElementById('certifications-container');
     if (!container || !certifications?.length) return;
 
-    container.innerHTML = certifications.map((cert, index) => `
-        <div class="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-md transition-all duration-300 flex items-center gap-4 reveal-up">
-            <div class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out">
+    container.innerHTML = certifications.map((cert, index) => {
+        const inner = `
+            <div class="w-12 h-12 rounded-full bg-brand-sky/10 flex items-center justify-center border border-brand-sky/20 group-hover:border-brand-sky/50 group-hover:scale-110 transition-all duration-300 ease-out shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-sky">
                     ${index === 0
                         ? `<path d="M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" /><path d="M2 12h1" /><path d="M21 12h1" /><path d="M12 2v1" /><path d="M12 21v1" /><path d="m4.93 4.93.7.7" /><path d="m18.36 18.36.7.7" /><path d="m4.93 19.07.7-.7" /><path d="m18.36 5.64.7-.7" />`
@@ -149,9 +123,12 @@ function renderCertifications(certifications) {
             <div>
                 <h4 class="text-white font-serif font-medium text-lg [.light-mode_&]:text-black/80">${cert.title}</h4>
                 <span class="text-xs text-brand-sky font-mono">${cert.subtitle}</span>
-            </div>
-        </div>
-    `).join('');
+            </div>`;
+        const classes = "group relative p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] [.light-mode_&]:bg-slate-50 [.light-mode_&]:border-slate-200 [.light-mode_&]:shadow-sm [.light-mode_&]:hover:shadow-md transition-all duration-300 flex items-center gap-4 reveal-up";
+        return cert.link
+            ? `<a href="${cert.link}" target="_blank" rel="noopener noreferrer" class="${classes}">${inner}</a>`
+            : `<div class="${classes}">${inner}</div>`;
+    }).join('');
 
     observeRevealElements('#certifications-container .reveal-up');
 }
@@ -169,6 +146,29 @@ document.addEventListener('DOMContentLoaded', () => {
         link.href = config.resumeLink;
     });
 
+    if (config.site) {
+        if (config.site.title) document.title = config.site.title;
+        const setMeta = (selector, attr, value) => {
+            const el = document.querySelector(selector);
+            if (el && value) el.setAttribute(attr, value);
+        };
+        setMeta('meta[name="description"]', 'content', config.site.description);
+        setMeta('meta[name="author"]', 'content', config.site.author);
+        setMeta('meta[property="og:title"]', 'content', config.site.ogTitle || config.site.title);
+        setMeta('meta[property="og:description"]', 'content', config.site.ogDescription || config.site.description);
+        setMeta('meta[property="og:url"]', 'content', config.site.ogUrl);
+        setMeta('meta[property="og:image"]', 'content', config.site.ogImage);
+        const favicon = document.querySelector('link[rel="icon"]');
+        if (favicon && config.profilePicture) favicon.href = config.profilePicture;
+        const footerText = document.getElementById('footer-text');
+        if (footerText && config.site.footerText) footerText.textContent = config.site.footerText;
+    }
+
+    const navBrand = document.getElementById('nav-brand');
+    if (navBrand && (config.site?.name || typeof common !== 'undefined')) {
+        navBrand.textContent = config.site?.name || common.name;
+    }
+
     const emailLink = document.getElementById('contact-email-link');
     const emailText = document.getElementById('contact-email-text');
     if (emailLink) emailLink.href = `mailto:${config.gmail}`;
@@ -177,8 +177,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const phoneText = document.getElementById('contact-phone-text');
     if (phoneText) phoneText.textContent = config.mobile;
 
-    const heroDescription = document.getElementById('hero-description');
-    if (heroDescription && config.hero) heroDescription.innerHTML = config.hero.description;
+    if (config.hero) {
+        const heroEyebrow = document.getElementById('hero-eyebrow');
+        const heroTitle = document.getElementById('hero-title');
+        const heroDescription = document.getElementById('hero-description');
+        const heroPrimaryCta = document.getElementById('hero-primary-cta');
+        const heroSecondaryLabel = document.getElementById('hero-secondary-cta-label');
+        const heroLabelLeft = document.getElementById('hero-label-left');
+        const heroLabelRight = document.getElementById('hero-label-right');
+        const heroTools = document.getElementById('hero-tools-marquee');
+
+        if (heroEyebrow && config.hero.eyebrow) heroEyebrow.textContent = config.hero.eyebrow;
+        if (heroTitle && config.hero.titleHtml) heroTitle.innerHTML = config.hero.titleHtml;
+        if (heroDescription) heroDescription.innerHTML = config.hero.description;
+        if (heroPrimaryCta && config.hero.primaryCta) {
+            heroPrimaryCta.href = config.hero.primaryCta.href || '#experience';
+            const label = heroPrimaryCta.querySelector('span');
+            if (label) label.textContent = config.hero.primaryCta.label || 'View Experience';
+        }
+        if (heroSecondaryLabel && config.hero.secondaryCta?.label) {
+            heroSecondaryLabel.textContent = config.hero.secondaryCta.label;
+        }
+        if (heroLabelLeft && config.hero.labelLeft) heroLabelLeft.textContent = config.hero.labelLeft;
+        if (heroLabelRight && config.hero.labelRight) heroLabelRight.textContent = config.hero.labelRight;
+        if (heroTools && config.hero.tools?.length) {
+            const spans = config.hero.tools.map(t =>
+                `<span class="text-white/50 font-mono text-lg">${t}</span>`
+            ).join('');
+            heroTools.innerHTML = spans + spans;
+        }
+    }
 
     const aboutTitle = document.getElementById('about-title');
     const aboutDescription = document.getElementById('about-description');
@@ -323,8 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (gridContainer) {
             gridContainer.innerHTML = config.softwareKnowledge.map(item => {
-                const styles = SKILL_STYLES[item.category] || DEFAULT_SKILL_STYLE;
-                const iconPath = SKILL_ICONS[item.category] || `<circle cx="12" cy="12" r="10" />`;
+                const colorKey = item.color || 'sky';
+                const styles = SKILL_COLOR_STYLES[colorKey] || DEFAULT_SKILL_STYLE;
+                const iconPath = SKILL_ICONS_BY_COLOR[colorKey] || `<circle cx="12" cy="12" r="10" />`;
                 const skillsHtml = item.skills.map(skill =>
                     `<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-white/70 border border-white/5 ${styles.hoverBorder} transition-colors [.light-mode_&]:text-black/70 [.light-mode_&]:bg-black/5">${skill}</span>`
                 ).join('');

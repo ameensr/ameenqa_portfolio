@@ -10,6 +10,19 @@ const common = {
 };
 
 const config = {
+    // Site / SEO
+    site: {
+        name: common.name,
+        title: "Ameen S R | QA Engineer Portfolio",
+        description: "Portfolio of Ameen S R — Software QA Engineer with 3+ years of experience in manual and automation testing, API validation, and quality assurance.",
+        author: common.name,
+        ogTitle: "Ameen S R | QA Engineer Portfolio",
+        ogDescription: "Software QA Engineer specializing in manual testing, automation, and quality-driven development.",
+        ogUrl: "https://ameensr.github.io/ameenqa_portfolio/",
+        ogImage: "https://ameensr.github.io/ameenqa_portfolio/profile.jpg",
+        footerText: "© 2026 — This website was built on coffee, creativity, and Vibe Coding."
+    },
+
     // Core Info
     resumeLink: common.resumeLink,
     gmail: common.email,
@@ -18,7 +31,14 @@ const config = {
     profilePictureWebp: "profile.webp",
 
     hero: {
-        description: "Software QA Engineer | Manual & Automation Tester<br>3+ years ensuring bug-free, scalable applications through quality-driven testing"
+        eyebrow: "Where Reliability Begins — Let’s Work Together",
+        titleHtml: "Engineering perfection.<br><span class=\"text-white opacity-90\">Securing reliability.</span>",
+        description: "Software QA Engineer | Manual & Automation Tester<br>3+ years ensuring bug-free, scalable applications through quality-driven testing",
+        primaryCta: { label: "View Experience", href: "#experience" },
+        secondaryCta: { label: "Contact Me" },
+        labelLeft: "100% COVERAGE",
+        labelRight: "ZERO BUGS",
+        tools: ["CYPRESS", "SELENIUM", "PLAYWRIGHT", "JEST", "JIRA", "APPIUM"]
     },
     aboutMe: {
         title: "I turn assumptions into verified facts, <br> <span class='text-white/50'>and code into quality.</span>",
@@ -67,20 +87,24 @@ const config = {
             link: "https://drive.google.com/file/d/1foJB2ZHNhzoKRJpvRhjPkXsafPYys_Il/view?usp=drive_link"
         }
     ],
-    education: {
-        degree: "Bachelor of Engineering",
-        field: "Mechanical Engineering",
-        graduated: "Graduated 2022",
-        cgpa: "8.4"
-    },
+    education: [
+        {
+            degree: "Bachelor of Engineering",
+            field: "Mechanical Engineering",
+            graduated: "Graduated 2022",
+            cgpa: "8.4"
+        }
+    ],
     certifications: [
         {
             title: "AI-Powered Software Testing",
-            subtitle: "Specialized Certification"
+            subtitle: "Specialized Certification",
+            link: ""
         },
         {
             title: "Introduction to JIRA",
-            subtitle: "Project Management"
+            subtitle: "Project Management",
+            link: ""
         }
     ],
     contactSection: {
@@ -94,26 +118,32 @@ const config = {
     softwareKnowledge: [
         {
             category: "Quality Assurance & Testing",
+            color: "sky",
             skills: ["Manual Testing", "Functional, Regression & Smoke Testing", "Test Case Design & Execution", "Defect Tracking & Management", "JIRA", "Postman (API Testing)", "Selenium WebDriver", "TestNG", "JMeter (Basic)", "Git / GitHub", "SVN"]
         },
         {
             category: "Automation, Development & AI-Assisted Building",
+            color: "cyan",
             skills: ["Java (Core Basics)", "Selenium Automation (Learning / Hands-on)", "Antigravity IDE (AI-assisted development)", "Vibe Coding (Prompt-driven UI & logic generation)", "Eclipse", "Visual Studio Code"]
         },
         {
             category: "Database & Backend Validation",
+            color: "orange",
             skills: ["SQL", "MySQL", "Database Testing & Data Validation"]
         },
         {
             category: "Engineering & Design Tools",
+            color: "purple",
             skills: ["AutoCAD", "Revit (MEP – Basic)", "Pipe Sizer"]
         },
         {
             category: "Productivity & Collaboration",
+            color: "blue",
             skills: ["Microsoft Excel", "Microsoft Word", "Google Workspace"]
         },
         {
             category: "Creative & Visual Tools",
+            color: "pink",
             skills: ["Adobe Photoshop", "Adobe Illustrator", "Adobe Premiere Pro", "Adobe After Effects", "Figma"]
         }
     ],
@@ -138,4 +168,3 @@ const config = {
         }
     ],
 };
-
